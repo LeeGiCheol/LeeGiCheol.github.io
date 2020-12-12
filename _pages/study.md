@@ -1,6 +1,6 @@
 ---
 title: "study"
-layout: category
+layout: categories
 permalink: /study/
 author_profile: true
 ---
