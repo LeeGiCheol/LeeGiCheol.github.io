@@ -3,7 +3,7 @@ main:
   - title: "블로그 방문하기"
     url: https://leegicheol.github.io/
   - title: "study"
-    url: /categories/study/
+    url: /study/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"

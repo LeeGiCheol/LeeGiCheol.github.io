@@ -1,7 +1,7 @@
 ---
 title: "study"
 layout: category
-permalink: /categories/study/
+permalink: /study/
 author_profile: true
 ---
 
