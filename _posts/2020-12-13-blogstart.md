@@ -1,6 +1,6 @@
 ---
 title : "My First Post"
-category : 
+categories : 
     - study
 tag :
     - hello
