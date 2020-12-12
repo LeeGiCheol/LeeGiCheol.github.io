@@ -1,7 +1,7 @@
 ---
 title : "My First Post"
 category : 
-    - hello
+    - study
 tag :
     - hello
 toc : true
