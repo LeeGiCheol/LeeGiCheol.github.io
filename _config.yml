@@ -97,7 +97,7 @@ author:
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : ""
   location         : "Korea, Anyang"
-  email            : "leegicheolgc@gmail.com"
+  #email            : "leegicheolgc@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
