@@ -1,7 +1,9 @@
 # main links
 main:
+  - title: "블로그 방문하기"
+    url: https://leegicheol.github.io/
   - title: "study"
-    url: /study/
+    url: /categories/study/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
@@ -12,5 +14,3 @@ main:
   #   url: /sitemap/
 
 
-
-  
