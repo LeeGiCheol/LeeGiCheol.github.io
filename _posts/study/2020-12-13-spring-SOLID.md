@@ -7,11 +7,11 @@ tag :
 toc : true
 ---
 
-김영한님의 강의인 스프링 핵심 원리 - 기본편를 볼 기회가 생겨 공부해보았다.<br><br>
+김영한님의 강의인 스프링 핵심 원리 - 기본편을 볼 기회가 생겨 공부해보았다.<br><br>
 
 - **Spring 핵심 기술** : Spring DI Container, AOP, Event ...
 
-- **Spring Boot** : Tomcat 같은 웹서버를 내장해서 별도의 웹 서버를 설치하지 않아도 된다
+- **Spring Boot** : Tomcat 같은 웹서버를 내장해서 별도의 웹 서버를 설치하지 않아도 된다  
 
 - **SOLID**
     - SRP (Single Responsibility Principle)
