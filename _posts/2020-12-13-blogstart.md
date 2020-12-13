@@ -1,9 +1,9 @@
 ---
 title : "My First Post"
 categories : 
-    - study
+    - test
 tag :
-    - hello
+    - test
 toc : true
 ---
 
