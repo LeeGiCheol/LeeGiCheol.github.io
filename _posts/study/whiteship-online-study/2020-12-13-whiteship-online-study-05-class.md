@@ -3,7 +3,7 @@ title : "WhiteShip Live Study 5주차. Class"
 categories : 
     - whiteship-live-study
 tag :
-    - study
+    - whiteship-live-study
 toc : true
 ---
 
