@@ -226,3 +226,102 @@ public class Main {
 ```
 
 ### this 키워드 이해하기
+
+this는 **인스턴스 자기 자신**을 가리키는 참조변수이다.
+
+this 키워드를 이용해 생성자나 setter 메서드에 인스턴스의 필드 데이터에 접근할 수 있다.
+
+```java
+public class Person {
+
+    public Person getThis() {
+        return this;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person();
+        
+        System.out.println(person);
+        System.out.println(person.getThis());
+    }
+}
+```
+
+```java
+homework.livestudy.bst.Person@17c68925
+homework.livestudy.bst.Person@17c68925
+```
+
+this가 인스턴스 자기 자신을 가리키는 참조변수라 했는데, 위의 예제를 출력해보면 Person 객체의 참조변수 person과 getThis()의 값은 동일하다는 것을 알 수 있다.
+
+**참조변수**
+
+this가 자기 자신을 가리킨다는 의미를 받아들이기 좋은 예제가 Call By Value, Call By Reference 라고 생각했다. 예제는 swap으로 준비했다.
+
+```java
+public class CallByValue {
+    static void swap(int num1, int num2) {
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+    }
+
+    public static void main(String[] args) {
+
+        int num1 = 10;
+        int num2 = 20;
+
+        System.out.println("swap 호출 전 : " + num1 + ", " + num2);
+
+        swap(num1, num2);
+
+        System.out.println("swap 호출 후 : " + num1 + ", " + num2);
+    }
+}
+```
+
+```java
+swap 호출 전 : 10, 20
+swap 호출 후 : 10, 20
+```
+
+메인 메서드의 num1과 num2가 당연히 바뀌어야 할 것 같지만 바뀌지 않는다.
+위에서 잠깐 다뤘지만 매개변수의 값은 실제하는 값이 아니고 인자 값이 복사되는 값이다. 
+
+```java
+public class CallByReference {
+
+    int value;
+
+    public CallByReference(int value) {
+        this.value = value;
+    }
+
+    static void swap(CallByReference num1, CallByReference num2) {
+        int temp = num1.value;
+        num1.value = num2.value;
+        num2.value = temp;
+    }
+
+    public static void main(String[] args) {
+        CallByReference num1 = new CallByReference(10);
+        CallByReference num2 = new CallByReference(20);
+        System.out.println("swap 호출 전 : " + num1.value + ", " + num2.value);
+
+        swap(num1, num2);
+
+        System.out.println("swap 호출 후 : " + num1.value + ", " + num2.value);
+    }
+}
+```
+
+```java
+swap 호출 전 : 10, 20
+swap 호출 후 : 20, 10
+```
+
+Call By Reference는 주소의 값이 전달되기때문에 참조변수의 값이 변경이 된다.
+
+최근에 Hard Link, Symbolic Link에 대해 잠깐 보게되었는데 비슷한 느낌으로 다가온다.
