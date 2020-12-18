@@ -16,10 +16,10 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "cheolee study"
+title                    : "cheeolee study"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "cheolee"
+name                     : "cheeolee"
 description              : ""
 url                      : "https://leegicheol.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -93,7 +93,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "cheolee"
+  name             : "cheeolee"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : ""
   location         : "Korea, Anyang"
