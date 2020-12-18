@@ -7,7 +7,6 @@ tag :
 toc : true
 ---
 
-# 작성 중
 ## WhiteShip Live Study 5주차. Class
 
 ---
@@ -18,6 +17,7 @@ toc : true
 - 메소드 정의하는 방법
 - 생성자 정의하는 방법
 - this 키워드 이해하기
+- super 키워드 이해하기
 
 ### 과제
 - int 값을 가지고 있는 이진 트리를 나타내는 Node 라는 클래스를 정의하세요.
@@ -29,7 +29,8 @@ toc : true
 
 ### 클래스(Class)란
 
-- 자바에서 말하는 클래스란 객체를 정의하는 틀 또는 설계도와 같은 의미로 사용된다.
+- 자바에서 말하는 클래스란 객체를 정의하는 
+  틀 또는 설계도와 같은 의미로 사용된다.
 - 변수, 메서드를 가진 집단이다.
 - class 키워드로 정의할 수 있다.
 
@@ -60,6 +61,7 @@ public class Main {
 ```
 class java.lang.Object
 ```
+<br>
 
 **그런데 자바는 다중상속이 불가능하지 않나?**
 
@@ -71,7 +73,9 @@ public class A extends B {
 }
 ```
 
-하지만 위와같이 B클래스를 상속받는 A클래스가 있다면, A는 B를 상속받고 B는 Object 클래스를 상속받아 결과적으로 A또한 Object 클래스를 상속받게 된다.
+하지만 위와같이 B클래스를 상속받는 A클래스가 있다면, 
+A는 B를 상속받고 B는 Object 클래스를 상속받아 
+결과적으로 A또한 Object 클래스를 상속받게 된다.
 
 ### 객체를 만드는 방법
 
@@ -104,8 +108,10 @@ public class Main {
 }
 ```
 
-이름을 저장하는 Person 클래스를 만들고 Main 클래스에서 객체를 생성했다. 
-new 키워드는 Heap 영역의 메모리에 데이터를 저장할 공간을 할당받고 그 공간의 참조값을 객체에게 반환해 주고 생성자를 호출하게 된다.
+이름을 저장하는 Person 클래스를 만들고 
+Main 클래스에서 객체를 생성했다. 
+new 키워드는 Heap 영역의 메모리에 데이터를 저장할 공간을 할당받고 
+그 공간의 참조값을 객체에게 반환해 주고 생성자를 호출하게 된다.
 
 ```java
 public class Main {
@@ -138,7 +144,9 @@ main 메서드의 new는 해당 클래스의 새 인스턴스에 필요한 메�
 
 invokespecial은 생성자, 현재 클래스, 수퍼클래스의 메서드를 호출한다.
 
-사실 바이트코드는 딥한 영역이다 보니 본적도 없을 뿐더러, 해석도 쉽지않다. 그렇지만 new 연산자가 실제 작동하는 모습을 눈으로 보니 색다른 느낌이었다.
+사실 바이트코드는 딥한 영역이다 보니 
+본적도 없을 뿐더러, 해석도 쉽지않다. 
+그렇지만 new 연산자가 실제 작동하는 모습을 눈으로 보니 색다른 느낌이었다.
 
 ### 메서드(Method)란
 메서드는 특정 기능을 정의한 코드들의 집합이다.
@@ -157,7 +165,9 @@ invokespecial은 생성자, 현재 클래스, 수퍼클래스의 메서드를 �
 이 값은 지역변수로 메서드 호출이 끝나면 소멸되어 사용할 수 없다.
 5. **리턴 값** : 메서드가 작업을 마치고 반환하는 데이터
 
-리턴타입이 void가 아닌 경우 반드시 return문이 필요하다. 그러나 void인 경우 컴파일러가 메서드의 마지막에 'return;'을 자동적으로 추가해주기 때문에 리턴값은 생략 가능하다.
+리턴타입이 void가 아닌 경우 반드시 return문이 필요하다. 
+그러나 void인 경우 컴파일러가 메서드의 마지막에 'return;'을 
+자동적으로 추가해주기 때문에 리턴값은 생략 가능하다.
 
 
 
@@ -172,8 +182,10 @@ invokespecial은 생성자, 현재 클래스, 수퍼클래스의 메서드를 �
     - 생성자는 리턴 값이 없다.
 
 모든 클래스에는 생성자가 반드시 하나 이상 정의되어야 한다.
-그러나 생성자를 정의하지 않으면 컴파일러에 의해 **기본 생성자**가 추가되기 때문에 생략 가능하다.
-주의할 점은 컴파일러가 기본 생성자를 만들어주는 경우는 **생성자가 하나도 없을 때** 뿐이다. 
+그러나 생성자를 정의하지 않으면 컴파일러에 의해 
+**기본 생성자**가 추가되기 때문에 생략 가능하다.
+주의할 점은 컴파일러가 기본 생성자를 만들어주는 경우는
+**생성자가 하나도 없을 때** 뿐이다. 
 
 ```java
 public class Person {
@@ -192,7 +204,8 @@ public class Person {
 }
 ```
 
-위와 같이 기본생성자 없이 정의한 생성자만을 사용한다면 객체를 생성할 때 주의해야한다.
+위와 같이 기본생성자 없이 정의한 생성자만을 사용한다면 
+객체를 생성할 때 주의해야한다.
 
 ```java
 public class Main {
@@ -254,11 +267,14 @@ homework.livestudy.bst.Person@17c68925
 homework.livestudy.bst.Person@17c68925
 ```
 
-this가 인스턴스 자기 자신을 가리키는 참조변수라 했는데, 위의 예제를 출력해보면 Person 객체의 참조변수 person과 getThis()의 값은 동일하다는 것을 알 수 있다.
+this가 인스턴스 자기 자신을 가리키는 참조변수라 했는데,
+위의 예제를 출력해보면 Person 객체의 참조변수 person과 getThis()의 값은 동일하다는 것을 알 수 있다.
 
 **참조변수**
 
-this가 자기 자신을 가리킨다는 의미를 받아들이기 좋은 예제가 Call By Value, Call By Reference 라고 생각했다. 예제는 swap으로 준비했다.
+this가 자기 자신을 가리킨다는 의미를 받아들이기 좋은 예제가
+Call By Value, Call By Reference 라고 생각했다. 
+예제는 swap으로 준비했다.
 
 ```java
 public class CallByValue {
@@ -288,7 +304,7 @@ swap 호출 후 : 10, 20
 ```
 
 메인 메서드의 num1과 num2가 당연히 바뀌어야 할 것 같지만 바뀌지 않는다.
-위에서 잠깐 다뤘지만 매개변수의 값은 실제하는 값이 아니고 인자 값이 복사되는 값이다. 
+위에서 잠깐 다뤘지만 매개변수의 값은 실제하는 값이 아니고 인자 값이 복사되는 값이기 때문이다. 
 
 ```java
 public class CallByReference {
@@ -324,4 +340,33 @@ swap 호출 후 : 20, 10
 
 Call By Reference는 주소의 값이 전달되기때문에 참조변수의 값이 변경이 된다.
 
-최근에 Hard Link, Symbolic Link에 대해 잠깐 보게되었는데 비슷한 느낌으로 다가온다.
+최근에 Hard Link, Symbolic Link에 대해 잠깐 보게되었는데 비슷한 느낌을 받았다.
+
+### super 키워드 이해하기
+super 키워드는 자식 클래스에서 상속받은 부모 클래스의 멤버변수를 참조할때 사용된다.
+
+```java
+public class Parent {
+    int number = 10;
+}
+
+public class Child extends Parent {
+    int number = 100;
+
+    public void getNumber() {
+        System.out.println(number);       // 100
+        System.out.println(this.number);  // 100
+        System.out.println(super.number); // 10
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Child child = new Child();
+        child.getNumber();
+    }
+}
+```
+
+Parent를 상속받은 Child 클래스는 위의 코드와 같이
+super.number를 통해 Parent의 멤버변수에 접근할 수 있다. 
