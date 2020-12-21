@@ -6,7 +6,7 @@ tag :
     - whiteship-live-study
 toc : true
 ---
-
+# 작성중
 ## WhiteShip Live Study 6주차. 상속
 
 ---
@@ -252,6 +252,10 @@ JDK 1.5 부터 생긴 오버라이드 애노테이션은 사실 붙여도 안붙
 
 하지만 개발자가 Point 클래스의 getLocation 메서드를 getPoint로 변경하게 된다면 컴파일 에러가 발생한다. 
 또한 IDE는 똑똑하기 때문에 IntelliJ는 애노테이션에, Eclipse는 메서드에 컴파일 전부터 에러가 났음을 인식한다.
+
+![error](/assets/images/whiteship-live-study/2020-12-21/IntelliJ.png)
+
+![error](/assets/images/whiteship-live-study/2020-12-21/Eclipse.png)
 
 이처럼 @Override 를 붙여서 안전장치 역할을 해줄 수 있고, 오버라이드 된 메서드라는 걸 명시적으로 보여줄 수 있다.
 
