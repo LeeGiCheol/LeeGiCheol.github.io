@@ -1,5 +1,5 @@
 ---
-title : "WhiteShip Live Study 5주차. Class"
+title : "WhiteShip Live Study 6주차. 상속"
 categories : 
     - whiteship-live-study
 tag :
@@ -253,8 +253,10 @@ JDK 1.5 부터 생긴 오버라이드 애노테이션은 사실 붙여도 안붙
 하지만 개발자가 Point 클래스의 getLocation 메서드를 getPoint로 변경하게 된다면 컴파일 에러가 발생한다. 
 또한 IDE는 똑똑하기 때문에 IntelliJ는 애노테이션에, Eclipse는 메서드에 컴파일 전부터 에러가 났음을 인식한다.
 
+```IntelliJ```
 ![error](/assets/images/whiteship-live-study/2020-12-21/IntelliJ.png)
 
+```Eclipse```
 ![error](/assets/images/whiteship-live-study/2020-12-21/Eclipse.png)
 
 이처럼 @Override 를 붙여서 안전장치 역할을 해줄 수 있고, 오버라이드 된 메서드라는 걸 명시적으로 보여줄 수 있다.
@@ -266,3 +268,125 @@ JDK 1.5 부터 생긴 오버라이드 애노테이션은 사실 붙여도 안붙
 물론 당연히 완전히 새롭게 만드는 것도 가능하며, 
 위와 같은 경우라면 조금 전에 공부했던 super 키워드를 통해 조금 더 간단하게 표현할 수도 있다.
 
+---
+
+**오버라이드의 조건**
+- 선언부가 부모 클래스의 메서드와 일치해야 한다.
+- 접근제한자는 부모 클래스의 메서드보다 더 좁은 범위로 변경할 수 없다.
+- 부모 클래스의 메서드보다 많은 수의 예외를 선언할 수 없다.
+
+
+---
+
+
+
+---
+
+### 추상클래스
+지난주 스터디 주제인 클래스는 보통 설계도로 예시를 많이 든다.  
+추상 클래스같은 경우 미완성 설계도라고 생각하면 좋을 것 이다.  
+자체적인 클래스 역할보다는 새로운 클래스를 작성하는데 있어 바탕이 되는 조상 클래스로서의 의미가 크다.
+
+예를들어 강아지 클래스와 고양이 클래스가 있다고 가정하자.  
+둘 다 '운다' 라는 공통점은 있지만 울음소리는 분명히 다르다.  
+이럴 경우 '동물' 이라는 추상 클래스를 만들고 '운다' 라는 행위를 추상 메서드로 만들어 사용할 수 있다.
+
+
+```java
+public abstract class Animal {
+    abstract void cry();
+}
+
+public class Dog extends Animal {
+    void cry() {
+      System.out.println("멍멍!");
+    }
+}
+
+public class Cat extends Animal {
+    void cry() {
+      System.out.println("야옹~");
+    }
+}
+```
+
+이처럼 abstract 키워드를 사용해 추상클래스를 만들 수 있다.  
+추상메서드는 abstract 키워드를 사용하고 뒤는 중괄호 '{}' 가 아닌 세미콜론 ';'을 사용하며, 구현부는 존재하지 않는다.
+
+추상클래스는 추상메서드를 가질 수 있는 것을 제외하면  
+일반 클래스처럼 생성자, 일반메서드, 멤버변수를 가질 수 있다는 특징이 있다.
+
+---
+
+### final 키워드
+
+final 키워드는 **변경될 수 없는** 이라는 의미를 가지고 있다.  
+대부분의 대상에 붙일 수 있는 키워드이다.
+
+![error](/assets/images/whiteship-live-study/2020-12-21/final.png)
+
+변수에 final 키워드를 붙여 상수로 만들어 사용 할 경우  
+변수명은 일반적으로 상수라는 것을 알기 쉽게 하기위해 모두 대문자로 작성한다.
+
+```java
+public class Main {
+    final int IMMUTABLE = 10;
+}
+```
+
+대표적인 final 클래스는 String이다.  
+String은 불변이라는 특징을 가지고 있다.  
+
+```java
+public class Main { 
+    public static void main(String[] args) {
+        String str = "One ";
+        str += "Two";
+        System.out.println(str);
+  }
+}
+```
+출력되는 결과는 당연히 "One Two" 일 것이다.
+
+그러나 첫번째 줄의 str과 두번째 줄의 str이 참조하는 주소는 다르다.  
+String은 불변의 특징을 가지기 때문에 문자열 연산과 같은 작업 시 새로운 문자열을 만들기 때문이다.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        String str = "One ";
+        System.out.println(str.hashCode());
+        System.out.println(str.hashCode());
+
+        str += "Two";
+        System.out.println(str.hashCode());
+        System.out.println(str.hashCode());
+    }
+}
+// 결과
+2462362     // str(One)
+2462362     // str(One)
+341866834   // str(Two)
+341866834   // str(Two)
+```
+---
+
+### Object 클래스
+
+java.lang 패키지는 자바에서 가장 기본이 되는 클래스들이 포함되어 있으며, 그렇기 때문에 import문 없이도 사용가능하다.
+별 생각없이 사용해왔던 System.out.println 의 System, String, Math와 같은 클래스들은 java.lang 패키지에 포함되어있다.
+
+Object 클래스 역시 java.lang 패키지에 속해있다.
+
+Object 클래스는 모든 클래스의 최고 조상이기 때문에 모든 클래스에서 Object 클래스의 멤버를 사용할 수 있다.
+
+![error](/assets/images/whiteship-live-study/2020-12-21/Object.png)
+
+위 사진과 같이 분명 Object를 상속받지 않았지만, Object 클래스의 멤버를 Override 할 수도 있다.
+
+문자열 비교할때 많이 사용했던 equals()나  
+바로 위에서 객체의 해시코드를 확인할 수 있었던 hashcode(),  
+객체의 정보를 문자열로 반환하는 toString(),  
+클래스 인스턴스를 반환하는 getClass() 와 같이 익숙한 메서드들이 많이 보인다.
+
+---
