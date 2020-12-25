@@ -375,6 +375,9 @@ interface Dispatch {
 Static이던, Dynamic이던 Dispatch가 한번 일어난 시점에서  
 Dynamic Dispatch가 한번 더 일어나면 Double Dispatch가 된다.
 
+<br>
+
+**팩토리패턴**   
 정확히 맞는 예시인지는 모르겠지만 나는 여기서 팩토리패턴이 생각났다.  
 팩토리패턴은 클래스의 인스턴스를 만드는 일을 서브클래스에게 맡기는 것을 의미한다.  
 
