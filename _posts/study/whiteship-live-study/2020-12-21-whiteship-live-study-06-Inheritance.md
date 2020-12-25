@@ -6,7 +6,7 @@ tag :
     - whiteship-live-study
 toc : true
 ---
-# 작성중
+
 ## WhiteShip Live Study 6주차. 상속
 
 ---
@@ -121,8 +121,6 @@ public class Main {
 ---
 
 ### super키워드
-
-
 
 ```java
 public class Parent {
@@ -283,9 +281,182 @@ Point3D 클래스는 3차원으로 3개의 좌표가 필요하다.
 
 ---
 
+### 다이나믹 메서드 디스패치 (Dynamic Method Dispatch)
+ 
+```text
+1. (특히 특별한 목적을 위해) 보내다[파견하다]
+2. (편지소포메시지를) 보내다[발송하다]
+...
+```
+네이버 영어사전을 참고한 Dispatch의 뜻이다.
 
+Dispatch는 보내다 라는 뜻을 가졌다.  
+프로그래밍에서 메시지를 보낸다는 것은 곧 메서드 호출이 된다.  
+그렇기에 Method Dispatch는 메서드를 호출하는 것을 의미한다고 생각하면 될 것 같다.  
+Method Dispatch의 종류로는 Static Dispatch와 Dynamic Dispatch가 있다.
 
 ---
+
+Static Dispatch와 Dynamic Dispatch를 알아보기 전에,  
+Runtime과, Compile Time에 대해 간략하게 짚고 넘어가겠다.  
+
+```text
+- Compile Time (컴파일)
+    Java와 같은 프로그래밍 언어로 작성된 소스코드를  
+    컴퓨터가 인식 할 수 있는 기계어로 변환되어 실행 가능한 프로그램이 되는 과정
+        ex) java 파일을 javac Main.java 명령어를 사용하면 Main.class 파일이 생성되는 과정 
+
+- RunTime (런타임)
+    컴파일 과정을 마친 응용프로그램이 사용자에 의해 실행되는 때
+        ex) class 파일을 java Main 명령어를 사용할 때
+  
+- Compile Time Error
+    대표적으로 세미콜론을 쓰지않거나, 키워드의 맞춤법이 틀린 등 문법이 잘못됬을 때 발생하는 Syntax Error가 있다. 
+    IDE를 사용 할 경우 실행 전부터 IDE가 빨간줄을 그어버린다. 
+     
+- RunTime Error 
+    이미 컴파일이 완료되었으나 의도치 않은 예외 상황으로 발생하는 에러이다.
+    대표적으로 객체를 생성하지 않고 Null Object를 참조하려고해서 발생하는 NPE (NullPointException),   
+    정수를 0으로 나눗셈을 하면 발생하는 ArithmeticException 등이 있다.
+```
+
+---
+
+**Static Dispatch**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Dispatch dispatch = new Dispatch();
+        dispatch.print();
+    }
+}
+
+class Dispatch {
+    void print() {
+        System.out.println("Static Dispatch!");
+    }
+}
+```
+
+**Static Dispatch**는 구현클래스를 이용해 컴파일 타임에서부터 어떤 메서드가 호출될지 정해져있는 것이다.  
+자바에서 객체 생성은 런타임시에 호출된다.  
+컴파일 시점에 Dispatch라는 구현 클래스의 정보를 알 수 있는데,  
+그렇기에 메서드를 호출하면 어떤 메서드가 호출될지 정적으로 정해질 수 있다.
+
+
+**Dynamic Dispatch**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Dispatch dispatch = new DispatchImpl();
+        dispatch.print();
+    }
+}
+
+class DispatchImpl implements Dispatch {
+    @Override
+    public void print() {
+        System.out.println("Dynamic Dispatch!");
+    }
+}
+
+interface Dispatch {
+    void print();
+}
+```
+
+반면 **Dynamic Dispatch**는 인터페이스를 이용해 호출되는 메서드가 동적으로 정해지는 것을 말한다.  
+컴파일 시점에는 어떤 메서드가 실행되는지 모르고, 인터페이스의 (추상클래스) 메서드가 호출되는 것만 알고있다.  
+런타임 시점에 Dispatch에 할당된 객체가 무엇인지 확인하고 메서드를 호출하게 된다.
+
+**Double Dispatch**
+Static이던, Dynamic이던 Dispatch가 한번 일어난 시점에서  
+Dynamic Dispatch가 한번 더 일어나면 Double Dispatch가 된다.
+
+정확히 맞는 예시인지는 모르겠지만 나는 여기서 팩토리패턴이 생각났다.  
+팩토리패턴은 클래스의 인스턴스를 만드는 일을 서브클래스에게 맡기는 것을 의미한다.  
+
+```java
+public interface Shape {
+	void draw();
+}
+
+public class Circle implements Shape {
+  @Override
+  public void draw() {
+    System.out.println("Circle - draw() Method.");
+  }
+}
+
+
+public class Square implements Shape {
+  @Override
+  public void draw() {
+    System.out.println("Square - draw() Method.");
+  }
+}
+
+
+public class Rectangle implements Shape {
+  @Override
+  public void draw() {
+    System.out.println("Rectangle - draw() Method.");
+  }
+}
+
+
+public class ShapeFactory {
+
+  public Shape getShape(String shapeType) {
+    if(shapeType == null) {
+      return null;
+    }
+  
+    if(shapeType.equalsIgnoreCase("CIRCLE")) {
+      return new Circle();
+    }
+    else if(shapeType.equalsIgnoreCase("RECTANGLE")) {
+      return new Rectangle();
+    }
+    else if(shapeType.equalsIgnoreCase("SQUARE")) {
+      return new Square();
+    }
+  
+    return null;
+  }
+}
+
+
+public class FactoryPatternTest {
+  public static void main(String[] args) {
+    ShapeFactory shapeFactory = new ShapeFactory();
+
+    Shape shape1 = shapeFactory.getShape("CIRCLE");
+    shape1.draw();
+    
+    Shape shape2 = shapeFactory.getShape("RECTANGLE");
+    shape2.draw();
+    
+    Shape shape3 = shapeFactory.getShape("SQUARE");
+    shape3.draw();
+  }
+}
+
+// 결과
+Circle - draw() Method.
+Rectangle - draw() Method.
+Square - draw() Method.
+```
+
+위의 예제를 보면 ShapeFactory에 의해서 도형의 모양이 정해진다.  
+구현클래스인 ShapeFactory에 의해 Static Dispatch 한번 발생하고, 
+draw() 메서드를 찾기 위해 Dynamic Dispatch 한번 발생하게 된다.
+
+---
+
+
 
 ### 추상클래스
 지난주 스터디 주제인 클래스는 보통 설계도로 예시를 많이 든다.  
