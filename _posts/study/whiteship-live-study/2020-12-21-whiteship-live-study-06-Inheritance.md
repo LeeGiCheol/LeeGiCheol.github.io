@@ -371,14 +371,16 @@ interface Dispatch {
 컴파일 시점에는 어떤 메서드가 실행되는지 모르고, 인터페이스의 (추상클래스) 메서드가 호출되는 것만 알고있다.  
 런타임 시점에 Dispatch에 할당된 객체가 무엇인지 확인하고 메서드를 호출하게 된다.
 
-**Double Dispatch**
+--- 
+
+### Double Dispatch
 Static이던, Dynamic이던 Dispatch가 한번 일어난 시점에서  
-Dynamic Dispatch가 한번 더 일어나면 Double Dispatch가 된다.
+Dynamic Dispatch가 한번 더 일어나면 **Double Dispatch**가 된다.
 
 <br>
 
 **팩토리패턴**   
-정확히 맞는 예시인지는 모르겠지만 나는 여기서 팩토리패턴이 생각났다.  
+정확히 맞는 예시인지는 모르겠지만 나는 여기서 디자인패턴 중 팩토리패턴이 생각났다.  
 팩토리패턴은 클래스의 인스턴스를 만드는 일을 서브클래스에게 맡기는 것을 의미한다.  
 
 ```java
@@ -458,8 +460,6 @@ Square - draw() Method.
 draw() 메서드를 찾기 위해 Dynamic Dispatch 한번 발생하게 된다.
 
 ---
-
-
 
 ### 추상클래스
 지난주 스터디 주제인 클래스는 보통 설계도로 예시를 많이 든다.  
