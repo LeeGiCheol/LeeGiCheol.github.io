@@ -461,6 +461,60 @@ draw() 메서드를 찾기 위해 Dynamic Dispatch 한번 발생하게 된다.
 
 ---
 
+### 수정
+
+```java
+public interface Shape {
+    void draw(ShapeFactory shape);
+}
+
+
+public class Circle implements Shape {
+  @Override
+  public void draw() {
+    System.out.println("Circle - draw() Method.");
+  }
+}
+
+
+public class Square implements Shape {
+  @Override
+  public void draw() {
+    System.out.println("Square - draw() Method.");
+  }
+}
+
+
+public class Rectangle implements Shape {
+  @Override
+  public void draw() {
+    System.out.println("Rectangle - draw() Method.");
+  }
+}
+
+
+public class ShapeFactory {
+  public void getShape(Shape shapeType) {
+    shapeType.draw(this);
+  }
+}
+
+public class FactoryPatternTest {
+  public static void main(String[] args) {
+    ShapeFactory shapeFactory = new ShapeFactory();
+    List<Shape> shape = Arrays.asList(new Circle(), new Square(), new Rectangle());
+
+    shape.forEach(shapeFactory::getShape);
+  }
+}
+```
+
+이해를 잘못하고있어서 피드백을 받았다.  
+다른분들의 자료를 보고 수정해보았다.
+
+
+---
+
 ### 추상클래스
 지난주 스터디 주제인 클래스는 보통 설계도로 예시를 많이 든다.  
 추상 클래스같은 경우 미완성 설계도라고 생각하면 좋을 것 이다.  
