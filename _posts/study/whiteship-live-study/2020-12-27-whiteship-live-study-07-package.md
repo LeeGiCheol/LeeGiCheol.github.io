@@ -41,6 +41,7 @@ package whiteship.live.study;
 
 IntelliJ에서 패키지를 생성하는 경우이다.  
 ![error](/assets/images/whiteship-live-study/2020-12-27/package1.png)  
+<br>
 ![error](/assets/images/whiteship-live-study/2020-12-27/package2.png)  
 위와 같이 패키지는 한번에 여러개를 생성할 수도 한번에 하나씩 생성할 수도 있다.  
 
