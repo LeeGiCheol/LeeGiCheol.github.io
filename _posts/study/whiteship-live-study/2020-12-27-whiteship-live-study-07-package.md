@@ -39,7 +39,7 @@ package whiteship.live.study;
 
 관습적으로 패키지명은 모두 소문자를 사용한다.  
 
-IntelliJ에서 패키지를 생성하는 경우이다.  
+다음은 IntelliJ에서 패키지를 생성하는 경우이다.  
 ![error](/assets/images/whiteship-live-study/2020-12-27/package1.png)  
 <br>
 ![error](/assets/images/whiteship-live-study/2020-12-27/package2.png)  
@@ -47,4 +47,5 @@ IntelliJ에서 패키지를 생성하는 경우이다.
 
 ---
 
-### 2. import 키워
+### 2. import 키워드
+
