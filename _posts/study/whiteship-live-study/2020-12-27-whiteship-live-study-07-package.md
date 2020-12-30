@@ -48,4 +48,109 @@ package whiteship.live.study;
 ---
 
 ### 2. import 키워드
+다른 패키지의 클래스를 사용하려면 사용할 때 마다 소스코드에 package명을 사용해야한다.  
+그러나 이러한 방법은 너무나도 불편하다.  
+이때 import 키워드를 선언함으로써 클래스 이름만으로도 클래스를 사용할 수 있다.
+
+```java
+import java.util.ArrayList;
+
+pubic class Main {
+  public static void main(String[] args) { 
+      //java.util.ArrayList arrayList = new java.util.ArrayList();  // 이렇게 사용할 것을
+      ArrayList arrayList = new ArrayList();                        // 이렇게 사용하게 해준다.
+  }
+}
+```
+
+아래와 같이 와일드카드도 사용 가능하다.  
+
+
+```java
+import java.util.*;
+
+pubic class Main {
+  public static void main(String[] args) { 
+      ArrayList arrayList = new ArrayList();
+      Scanner scan = new Scanner(System.in);
+  }
+}
+```
+
+
+**단** java.lang 패키지는 자바 프로그래밍에 있어서  
+가장 기본적인 클래스가 모인 패키지임으로, import문을 사용하지 않아도 사용할 수 있다.  
+대표적으로 String 클래스나, System 클래스 등이 있다.  
+
+---
+
+### 클래스패스
+
+클래스패스는 .class 파일이 포함된 디렉토리와 파일을 콜론(:)으로 구분한 목록이다.  
+
+소스코드를 작성하고 컴파일을 하면 바이트코드로 변환되어 ***.class 파일이 생긴다.  
+이 클래스 파일을 실행하기위해서는 우선 클래스 파일을 찾을 수 있어야 한다.  
+이때 클래스패스에 지정된 경로를 통해 클래스 파일을 찾을 수 있다.  
+
+---
+
+### CLASSPATH 환경변수
+
+사실 맥의 경우 환경변수는 배포환경이 아니라면 IDE에서 이미 잡아주기 때문에 설정하지 않아도 큰 문제는 없다.  
+맥에서 환경변수 설정하는 방법  
+
+```shell
+$ vi ~/.bash_profile
+
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home   # 본인의 자바 경로를 작성한다.
+export PATH=${PATH}:$JAVA_HOME/bin
+```
+
+```shell
+$ source ~/.bash_profile
+$ echo $PATH
+```
+
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath6.png)  
+
+나의 경우 파이썬의 환경변수가 먼저 잡혀있었기 때문에 빨간색으로 표시한 부분만 자바의 환경변수이다.
+
+---
+
+### -classpath 옵션
+
+한가지 예시를 보겠다.  
+
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath1.png)  
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath2.png)  
+
+아래를 보면 클래스를 두개 생성하고, 컴파일후 실행까지 했지만 전혀 이상이 없다.  
+하지만 MoveClass.class를 move라는 폴더로 옮기면 어떻게 될까?
+
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath3.png)  
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath4.png)  
+
+위와같이 **NoClassDefFoundError**가 발생하게 된다.  
+여기서 클래스패스를 설정해주면 다른 폴더에 있는 클래스 파일도 실행 할 수 있게 된다.
+
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath5.png)  
+
+아까와 달라진건 **<span style="color: rgb(255, 204, 102)">java -classpath ".:move" ClasspathTest</span>** 라는 명령어 뿐이다.  
+java ClasspathTest 명령어에 **<span style="color: rgb(255, 204, 102)">-classpath ".:move"</span>** 가 붙었을 뿐인데 실행은 성공했다.  
+
+**.:move**의 의미는 **.** 이 폴더에서 찾아보고, 만약 존재하지 않는다면 **:move** move 폴더에서 찾아라. 라는 의미이다.  
+:은 구분자 역할이며 윈도우에서는 :(콜론) 대신 ;(세미콜론)을 사용한다고 한다.  
+
+참고사항으로 **-classpath** 옵션은 줄여서 **-cp** 로도 사용 가능하다.  
+
+---
+
+### 접근지시자
+
+---
+
+
+
+
 
