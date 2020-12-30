@@ -113,7 +113,7 @@ $ echo $PATH
 ```
 
 ![error](/assets/images/whiteship-live-study/2020-12-27/classpath6.png)  
-
+<br>
 나의 경우 파이썬의 환경변수가 먼저 잡혀있었기 때문에 빨간색으로 표시한 부분만 자바의 환경변수이다.
 
 ---
@@ -122,20 +122,22 @@ $ echo $PATH
 
 한가지 예시를 보겠다.  
 
-![error](/assets/images/whiteship-live-study/2020-12-27/classpath1.png)  
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath1.png)
+<br>
 ![error](/assets/images/whiteship-live-study/2020-12-27/classpath2.png)  
-
+<br>
 아래를 보면 클래스를 두개 생성하고, 컴파일후 실행까지 했지만 전혀 이상이 없다.  
 하지만 MoveClass.class를 move라는 폴더로 옮기면 어떻게 될까?
 
 ![error](/assets/images/whiteship-live-study/2020-12-27/classpath3.png)  
+<br>
 ![error](/assets/images/whiteship-live-study/2020-12-27/classpath4.png)  
-
+<br>
 위와같이 **NoClassDefFoundError**가 발생하게 된다.  
 여기서 클래스패스를 설정해주면 다른 폴더에 있는 클래스 파일도 실행 할 수 있게 된다.
 
 ![error](/assets/images/whiteship-live-study/2020-12-27/classpath5.png)  
-
+<br>
 아까와 달라진건 **<span style="color: rgb(255, 204, 102)">java -classpath ".:move" ClasspathTest</span>** 라는 명령어 뿐이다.  
 java ClasspathTest 명령어에 **<span style="color: rgb(255, 204, 102)">-classpath ".:move"</span>** 가 붙었을 뿐인데 실행은 성공했다.  
 
