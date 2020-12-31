@@ -122,7 +122,7 @@ $ echo $PATH
 
 한가지 예시를 보겠다.  
 
-![error](/assets/images/whiteship-live-study/2020-12-27/classpath1.png)
+![error](/assets/images/whiteship-live-study/2020-12-27/classpath1.png)  
 <br>
 ![error](/assets/images/whiteship-live-study/2020-12-27/classpath2.png)  
 <br>
