@@ -156,7 +156,8 @@ java ClasspathTest 명령어에 **<span style="color: rgb(255, 204, 102)">-class
 이런 경우 해당 변수를 private이나 protected로 제한을 하고,  
 반드시 따라야하는것은 아니지만 일반적으로  
 get으로 시작하는 변수의 값을 읽는 메서드와  
-set으로 시작하는 변수의 값을 변경할 수 있는 메서드를 public으로 생성해 사용한다.
+set으로 시작하는 변수의 값을 변경할 수 있는 메서드를 public으로 생성해 사용한다.  
+이것을 **<span style="color: rgb(255, 204, 102)">getter, setter</span>** 라고 부른다.
 
 이것은 객체지향언어의 특징 중 하나인 캡슐화에 해당된다.   
 
