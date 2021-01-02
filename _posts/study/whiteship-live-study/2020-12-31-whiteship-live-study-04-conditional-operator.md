@@ -211,7 +211,7 @@ for (초기화; 조건식; 증감식) {
 
 아래의 for문은 블록안의 문장을 10번 반복한다.
 
-![error](../../../assets/images/whiteship-live-study/2020-12-31/for_loop.png)  
+![error](/assets/images/whiteship-live-study/2020-12-31/for_loop.png)  
 
 우선 변수 i에 1을 저장한다.  
 그리고 반복마다 i가 1씩증가하다가 10을 넘어서면 조건식이 false가 되어 반복을 마치게된다.
@@ -368,26 +368,35 @@ JUnit은 테스트 코드를 작성할때 사용하는 도구이다.
   - 테스트 케이스 전에 실행되는 메서드이다. @BeforeAll 애노테이션이 붙은 메서드는 static 이어야한다.
 - @AfterAll, @AfterEach
   - 테스트 케이스 이후에 실행되는 메서드이다.
-- @DisplayName, @DisplayNameGeneration
-  - @DisplayName
-    ```java
-    @Test
-    @DisplayName("테스트 코드 입니다.")
-    void displayName() { }
-    
-    @Test
-    @DisplayName("😋")
-    void emoji() { }
-    
-    // @DisplayName("여기 적힌 이름으로 실행된다.")
-    ```
+- @DisplayNameGeneration, @DisplayName
+ 
   - @DisplayNameGeneration
     ```java
-        @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-        void display_name_generation_replace_underscores() {
+    @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+    class DisplayNameTest() {
+
+      @Test
+      void display_name_generation_replace_underscores() { }
     }
-    // display name generation replace underscores
+    // 클래스내의 모든 테스트 메서드의 언더스코어(_)와 괄호를 지워준다.
     ```
+
+  - @DisplayName
+     ```java
+     @Test
+     @DisplayName("테스트 코드 입니다.")
+     void displayName() { }
+     
+     @Test
+     @DisplayName("😋")
+     void emoji() { }
+     
+     // @DisplayName("여기 적힌 이름으로 실행된다.")
+     ```
+  
+    ![error](/assets/images/whiteship-live-study/2020-12-31/displayName.png)  
+    <br>
+
 - Assertion
   - assertEquals(exoectedm actual)
     - 실제값이 기대한 값과 같은지 확인
