@@ -26,6 +26,11 @@ toc : true
 - 과제 4. 앞서 만든 ListNode를 사용해서 Stack을 구현하세요.
 - 과제 5. Queue를 구현하세요.
 
+[4주차 과제](https://github.com/LeeGiCheol/whiteship-live-study/tree/master/4week/src/main/java/com/whiteship/homework)
+
+[4주차 과제 테스트코드](https://github.com/LeeGiCheol/whiteship-live-study/tree/master/4week/src/test/java/com/whiteship/homework)
+
+
 ---
 
 ## 제어문
@@ -325,6 +330,12 @@ for (int i = 1; i <= 10; i++) {
 ---
 
 ## JUnit 5
+[백기선 - 더 자바, 애플리케이션을 테스트하는 다양한 방법](https://www.inflearn.com/course/the-java-application-test) 을 많이 참고했다.   
+테스트코드 작성이 어렵게만 느껴졌었는데,  
+강의를 보면서, 또 4주차 과제를 통해 이것저것 체험하면서 나름 테스트코드 작성에 익숙해지지 않았나 싶다.   
+
+<br>
+
 JUnit은 테스트 코드를 작성할때 사용하는 도구이다.   
 테스트 작성을 하는 자바 개발자 중 90% 이상이 사용한다고 한다.  
 
@@ -390,4 +401,3 @@ JUnit은 테스트 코드를 작성할때 사용하는 도구이다.
     - 예외 발생 확인
   - assertTimeout(duration, executable)
     - 특정 시간 안에 실행 완료되는지 확인
-  
