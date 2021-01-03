@@ -33,21 +33,6 @@ toc : true
 
 ---
 
-### 인터페이스 정의하는 방법
-1. 일반적으로 클래스를 정의할 때 사용하는 키워드인 class 대신 interface를 사용한다.  
-2. 모든 변수는(상수) public static final 이 붙어야하며, 생략 시 컴파일러가 자동으로 추가해준다.  
-3. 모든 메서드는 public abstract 이 붙어야하며, 생략 가능하다.
-    - 단, static 메서드와 default 메서드는 예외이다. (JDK 1.8부터)  
-
-```java
-interface 인터페이스 {
-    public static final 타입 상수 = 값;
-    public abstract 메서드(매개변수);
-}
-```
-
----
-
 ### 의문
 인터페이스는 추상메서드와 상수만을 사용할 수 있다.  
 그런데 추상메서드에 abstract 키워드를 붙였던 기억이 잘 나지 않아서 테스트를 해봤다.  
@@ -73,7 +58,22 @@ method 메서드는 자동으로 public abstract이 붙었고,
 
 ![error](/assets/images/whiteship-live-study/2021-01-03/interface_byteCode_2.png)
 
-마찬가지였다. 실수를 방지하기 위해 컴파일러가 직접 붙여주는게 아닐까 생각이 든다.  
+마찬가지였다. 실수를 방지하기 위해 컴파일러가 직접 붙여주는게 아닐까 생각이 든다.
+
+---
+
+### 인터페이스 정의하는 방법
+1. 일반적으로 클래스를 정의할 때 사용하는 키워드인 class 대신 interface를 사용한다.
+2. 모든 변수는(상수) public static final 이 붙어야하며, 생략 시 컴파일러가 자동으로 추가해준다.
+3. 모든 메서드는 public abstract 이 붙어야하며, 생략 가능하다.
+   - 단, static 메서드와 default 메서드는 예외이다. (JDK 1.8부터)
+
+```java
+interface 인터페이스 {
+    public static final 타입 상수 = 값;
+    public abstract 메서드(매개변수);
+}
+```
 
 ---
 
