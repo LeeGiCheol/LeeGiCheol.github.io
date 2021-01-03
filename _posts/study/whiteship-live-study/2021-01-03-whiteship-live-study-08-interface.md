@@ -210,7 +210,7 @@ public class Smartphone implements Phone, Internet, Mp3 {
 
 ### 인터페이스의 기본 메소드 (Default Method), 자바 8
 위에서 말했다시피 인터페이스는외 추상메서드만을 선언할 수 있었다.  
-JDK 1.8 부터 Default Method가 추가되었다.
+JDK 1.8 부터 Default Method가 추가되었다.  
 인터페이스는 구현보다는 선언에 집중이 되어있는데,  
 
 **무엇때문에 추가되었을까?**
