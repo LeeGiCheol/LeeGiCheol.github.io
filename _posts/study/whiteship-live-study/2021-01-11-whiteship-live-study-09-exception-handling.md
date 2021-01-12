@@ -24,6 +24,7 @@ toc : true
 ---
 
 ### 예외란?  
+#### RuntimeException과 RE가 아닌 것의 차이는?
 
 ![error](/assets/images/whiteship-live-study/2021-01-11/architecture.png)  
 
@@ -62,6 +63,8 @@ null값을 참조해 발생하는 NullPointerException, 0으로 나눗셈을 하
 ---
 
 ### 에러, 예외
+
+#### Exception과 Error의 차이는?
 
 런타임에러는 다시 에러와(Error) 예외로(Exception) 나뉘어진다.  
 에러는 OutOfMemoryError, StackOverFlowError 와 같은 발생 시 복구할 수 없는 심각한 오류를 의미한다.  
@@ -169,6 +172,53 @@ try{
 
 ---
 
+### finally
+finally 블럭은 예외와 상관없이 실행되는 블럭이다.  
+만약 try 블럭에서 예외가 발생하면 바로 catch 블럭을 찾기 때문에  
+꼭 필요한 코드가 실행되지 않을 수 있다. 이러한 경우에 finally를 사용 할 수 있다.  
+
+기본적으로 try-catch-finally 의 구조를 가지며,  
+예외 발생 시 try-catch-finally, 예외 발생이 하지 않으면 try-finally 순서로 동작한다.  
+
+```java
+String NPE = null;
+
+try {
+    System.out.println("예외가 발생할 겁니다.");
+    System.out.println(5 / 0);
+    System.out.println("이 문장은 꼭 출력됬으면 좋겠어요.");
+} catch (Exception e) {
+    System.out.println("이 문장은 꼭 출력됬으면 좋겠어요.");
+    e.printStackTrace();
+}
+
+// 결과
+예외가 발생할 겁니다.
+이 문장은 꼭 출력됬으면 좋겠어요.
+```
+
+위의 코드는 5 / 0 에서 예외가 발생할 것이다.  
+그러나 예외가 발생하더라도 꼭 출력했음 하는게 있다면 위와 같이 할 수 있다.  
+그렇지만 이런 코드는 굉장히 비효율적으로 보인다.    
+
+```java
+try {
+    System.out.println("예외가 발생할 겁니다.");
+    System.out.println(5 / 0);
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    System.out.println("이 문장은 꼭 출력됬으면 좋겠어요.!");
+}
+// 결과
+예외가 발생할 겁니다.
+이 문장은 꼭 출력됬으면 좋겠어요.!
+```
+
+결과는 똑같지만 finally 블럭을 활용한 코드가 훨씬 보기 좋고 간결한 것을 알 수 있다.   
+
+---
+
 ### throw
 throw 키워드를 사용하면 프로그래머가 고의적으로 예외를 발생시킬 수 있다.
 
@@ -248,7 +298,98 @@ main 메서드 또한 예외를 throws 하게 된다면 JVM이 대신 처리하�
 
 ---
 
-### finally
+### 커스텀한 예외 만드는 방법
+
+때때로 직접 예외를 커스텀할 경우가 생긴다.  
+예를들어 어떤 홈페이지에서 회원가입을 하려고 하는데 나이를 입력하던 도중 실수로 음수 나이를 적었다.  
+예외처리를 하고 싶지만, 마땅한 예외가 보이지 않는다.  
+이런 경우 커스텀한 예외를 만들어 던질 수 있다.  
+(물론 if문이나 정규표현식 등 해결할 수 있는 방법은 다양하다.)  
+
+예외를 커스텀하기 위해선 Exception을 상속받아야한다.  
+그 후 생성자를 만들어 출력할 메시지를 받아 출력할 수 있다.  
+이때 기본 생성자를 만들어 사용하면 메시지없이 어떤 예외인지만 볼 수 있다.  
+
+
+```java
+public class AgeException extends Exception {
+    AgeException() {}
+    
+    AgeException(String message) {
+        super(message);
+    }
+}
+```
+
+```java
+public class SignUpService {
+    public void setAge(int age) throws AgeException {
+        if (age < 0) {
+            throw new AgeException("나이는 음수일 수 없습니다!!!");
+        }
+    }
+}
+```
+
+```java
+public class SignUp {
+    public static void main(String[] args) throws AgeException {
+        SignUpService signUp = new SignUpService();
+        
+        System.out.println("회원가입을 시작합니다~");
+        ...
+        signUp.setAge(-26);
+        ...
+    }
+}
+```
+
+![error](/assets/images/whiteship-live-study/2021-01-11/custom-exception.png)  
+
+기본 생성자로 예외 처리를 한 경우  
+
+![error](/assets/images/whiteship-live-study/2021-01-11/custom-exception2.png)  
+
+메시지를 받는 생성자로 예외 처리를 한 경우  
+
+Exception 이름이 AgeException인 것과 내가 작성한 예외 메시지를 볼 수 있다. (SignUpService에서 작성함)  
+
+커스텀 예외 클래스의 생성자에서 ```super(message);``` 를 사용한다.  
+따라 올라가보면 Throwable 클래스의 생성자를 볼 수 있다.  
+Throwable 클래스에서 예외 메시지 처리를 하고 있는 것이다.  
+
+--- 
+
+### 예외처리 비용
+
+![error](/assets/images/whiteship-live-study/2021-01-11/custom-exception3.png)    
+
+위 코드는 Throwable 클래스의 생성자이다. 
+
+보통 예외처리는 처리 비용이 비싸다고 한다.  
+try-catch를 동작 하면서 발생하는 검사들도 하나의 원인이겠지만,  
+Throwable 생성자의 fillInStackTrace() 메서드가 주 원인이다.  
+이 메서드는 예외가 발생한 메서드의 **Stack Trace**를 모두 출력해주기 때문이다.
+
+```text
+StackTrace란 Application이 실행된 시점부터 현재 실행 위치까지의 메서드 호출 목록이다.
+```
+
+
+커스텀 예외에서 이 메서드를 오버라이딩해 스택 트레이스를 최소화 해줄 수 있다.  
+
+```java
+@Override
+public synchronized Throwable fillInStackTrace() {
+    return this;
+}
+```
+
+![error](/assets/images/whiteship-live-study/2021-01-11/custom-exception4.png)  
+
+하지만 예외 처리 비용을 아끼겠다고 굳이 사용할 일이 생길까 싶긴하다...  
+
+---
 
 
 
