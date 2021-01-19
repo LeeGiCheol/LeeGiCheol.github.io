@@ -2,9 +2,9 @@
 title : "WhiteShip Live Study 10주차. 멀티쓰레드"
 categories :
 - whiteship-live-study
-  tag :
+tag :
 - whiteship-live-study
-  toc : true
+toc : true
 ---
 
 ## WhiteShip Live Study 10주차. 멀티쓰레드
