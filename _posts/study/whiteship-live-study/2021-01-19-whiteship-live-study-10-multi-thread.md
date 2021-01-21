@@ -75,7 +75,6 @@ public class Main {
 }
 ```
 ```text
-결과
 main end
 a
 b
@@ -122,7 +121,7 @@ main end
 심지어 각 쓰레드의 for문이 끝나고 나오도록 출력한 'xxxThread end'와  
 모든 쓰레드가 종료되고 출력할 'main end' 까지도..
 
-이 테스트를 통해 쓰레드는 여러가지 작업을 ```동시에``` 수행할 수 있다는 것을 알 수 있.
+이 테스트를 통해 쓰레드는 여러가지 작업을 **동시에** 수행할 수 있다는 것을 알 수 있.
 
 자세한건 아래에서 다시 살펴보도록 하자.
 
@@ -271,18 +270,16 @@ main 메서드가 모든 작업을 수행하였더라도,
 
 ![error](/assets/images/whiteship-live-study/2021-01-19/state.png)
 
-1) 쓰레드를 생성하고 start()를 호출하면 바로 실행되는 것이 아니라 실행 대기열에 저장되어 자신의 차례가 될 떄까지 기다려야 한다.  
-   실행대기열은 큐 (queue) 와 같은 구조로 먼저 실행대기열에 들어온 쓰레드가 먼저 실행된다.
-2) 실행대기상태에 있다가 자신의 차례가 되면 실행상태가 된다.
-3) 주어진 실행시간이 다 되거나 yield() 를 만나면 다시 실행대기상태가 되고 다음 차례의 쓰레드가 실행상태가 된다.
-4) 실행 중에 suspend(), sleep(), wait(), join(), I/O block에 의해 일시정지상태가 될 수 있다.  
-   I/O block은 입출력작업에서 발생하는 지연상태를 말한다. 사용자의 입력을 기다리는 경우를 예로 들 수 있는데,  
-   이런 경우 일시정지 상태에 있다가 사용자가 입력을 마치면 다시 실행대기상태가 된다.
-5) 지정된 일시정지시간이 다되거나 (time-out), notify(), resume(), interrupt()가 호출되면  
-   일시정지상태를 벗어나 다시 실행대기열에 저장되어 자신의 차례를 기다리게 된다.
-6) 실행을 모두 마치거나 stop()이 호출되면 쓰레드는 소멸된다.
-
-그림실력이 상당하다...ㅎ
+1) 쓰레드를 생성하고 start()를 호출하면 바로 실행되는 것이 아니라 실행 대기열에 저장되어 자신의 차례가 될 떄까지 기다려야 한다.    
+   실행대기열은 큐 (queue) 와 같은 구조로 먼저 실행대기열에 들어온 쓰레드가 먼저 실행된다.  
+2) 실행대기상태에 있다가 자신의 차례가 되면 실행상태가 된다.  
+3) 주어진 실행시간이 다 되거나 yield() 를 만나면 다시 실행대기상태가 되고 다음 차례의 쓰레드가 실행상태가 된다.  
+4) 실행 중에 suspend(), sleep(), wait(), join(), I/O block에 의해 일시정지상태가 될 수 있다.    
+   I/O block은 입출력작업에서 발생하는 지연상태를 말한다. 사용자의 입력을 기다리는 경우를 예로 들 수 있는데,   
+   이런 경우 일시정지 상태에 있다가 사용자가 입력을 마치면 다시 실행대기상태가 된다.  
+5) 지정된 일시정지시간이 다되거나 (time-out), notify(), resume(), interrupt()가 호출되면   
+   일시정지상태를 벗어나 다시 실행대기열에 저장되어 자신의 차례를 기다리게 된다.  
+6) 실행을 모두 마치거나 stop()이 호출되면 쓰레드는 소멸된다.  
 
 ---
 
@@ -291,12 +288,12 @@ main 메서드가 모든 작업을 수행하였더라도,
 쓰레드 클래스는 priority (우선순위) 라는 변수/상수를 가지고 있다.
 
 ```java
-    void setPriority(int newPriority);
-    int getPriority();
-    
-    public static final int MIN_PRIORITY = 1;   // 최소 우선순위
-    public static final int NORM_PRIORITY = 5;  // 보통 우선순위
-    public static final int MAX_PRIORITY = 10;  // 최대 우선순위
+ void setPriority(int newPriority);
+ int getPriority();
+ 
+ public static final int MIN_PRIORITY = 1;   // 최소 우선순위
+ public static final int NORM_PRIORITY = 5;  // 보통 우선순위
+ public static final int MAX_PRIORITY = 10;  // 최대 우선순위
 ```
 
 쓰레드의 우선순위의 범위는 1~10이며 숫자가 높을수록 우선순위가 높다.  
