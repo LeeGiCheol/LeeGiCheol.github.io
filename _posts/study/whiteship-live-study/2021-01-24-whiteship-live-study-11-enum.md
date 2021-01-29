@@ -318,3 +318,17 @@ public final enum com/example/demo/Card extends java/lang/Enum {
 
 ### EnumSet
 
+EnumSet은 Set 인터페이스의 구현체로 Set 형태로 사용할 수 있다.    
+
+
+```java
+public static void main(String[] args) {
+    EnumSet<Card> cardEnumSet = EnumSet.allOf(Card.class);
+
+    Iterator<Card> iterator = cardEnumSet.iterator();
+
+    while (iterator.hasNext()) {
+        System.out.println(iterator.next());
+    }
+}
+```
