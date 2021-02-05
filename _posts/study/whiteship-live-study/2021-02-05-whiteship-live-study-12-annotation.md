@@ -188,6 +188,11 @@ Lombok, JPA 등 많은 라이브러리에서 사용된다.
 
 ---
 
+# 참고
+[선장님 - 인프런 강의 더 자바, 코드를 조작하는 다양한 방법](https://www.inflearn.com/course/the-java-code-manipulation?inst=c160e128)  
+[남궁성 - 자바의 정석](http://www.yes24.com/Product/Goods/24259565)  
+
+---
 
 
 
