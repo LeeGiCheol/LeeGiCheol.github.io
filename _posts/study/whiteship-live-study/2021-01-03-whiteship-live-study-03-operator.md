@@ -89,7 +89,7 @@ number1 % number2 = 4
 아래의 빨간색 수를 1이면 더하고, 0이면 더하지 않는다.  
 즉 128 + 16 + 8 + 1 을 하면 10011001의 10진수 숫자인 153이 나온다.  
 
-![error](/assets/images/whiteship-live-study/2021-01-03-operator/decimalToBinary.png)  
+![error](/assets/images/whiteship-live-study/2021-01-03-operator/decimalTobinary.png)  
 
 반대로 10진수를 2진수를 변경하기 위해선 2로 나누고 각각의 나머지를 아래에서부터 연결하면 2진수가 된다.  
 
