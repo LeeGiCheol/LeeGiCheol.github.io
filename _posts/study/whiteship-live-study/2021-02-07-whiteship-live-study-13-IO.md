@@ -54,7 +54,7 @@ IO와 NIO에 대해서는 마지막에 다루겠다.
 TCP 통신의 각 소켓에는 send buffer와 receive buffer가 있다.  
 이때 쓰이는 buffer는 패킷의 유실방지 및 성능개선 등의 이유로 사용된다.  
 
-![error](../../../assets/images/whiteship-live-study/2021-02-07/tcp-buffer.png)
+![error](/assets/images/whiteship-live-study/2021-02-07/tcp-buffer.png)
 
 네트워크 스터디가 아니니 가볍게 버퍼가 무엇인지에 초점을 두고 생각해보자.  
 
@@ -107,10 +107,10 @@ InputStream은 Reader, OutputStream은 Writer로 바꿔 사용하면 된다.
 byte배열과 char배열인 것 말고는 사용법은 거의 동일하다.  
 
 **Byte Stream**  
-![error](../../../assets/images/whiteship-live-study/2021-02-07/byte-stream.png)  
+![error](/assets/images/whiteship-live-study/2021-02-07/byte-stream.png)  
 
 **Character Stream**  
-![error](../../../assets/images/whiteship-live-study/2021-02-07/char-stream.png)  
+![error](/assets/images/whiteship-live-study/2021-02-07/char-stream.png)  
 
 ---
 
@@ -142,7 +142,7 @@ Scanner를 통해 콘솔에 데이터를 입력할 수 있다.
 
 **파일 읽기**  
 
-![error](../../../assets/images/whiteship-live-study/2021-02-07/file-read.png)  
+![error](/assets/images/whiteship-live-study/2021-02-07/file-read.png)  
 
 FileRead.txt 파일을 미리 만들어두었다.  
 FileReader를 통해 읽어 올 것이고,  
@@ -205,7 +205,7 @@ public static void main(String[] args){
 }
 ```
 
-![error](../../../assets/images/whiteship-live-study/2021-02-07/file-write.png)  
+![error](/assets/images/whiteship-live-study/2021-02-07/file-write.png)  
 
 
 물론 BufferedWriter 또한 아래와 같이 한줄로 줄일 수 있다.  
@@ -231,7 +231,7 @@ Blocking을 사용하는 IO와는 다르게 NIO에는 Non-Blocking이라는 것�
 
 #### Blocking
 
-![error](../../../assets/images/whiteship-live-study/2021-02-07/blocking.png)
+![error](/assets/images/whiteship-live-study/2021-02-07/blocking.png)
 
 블로킹은 위와 같이 소켓마다 새로운 Thread를 할당해야한다.  
 이러한 방식의 문제점은 크게 세 가지가 있다.  
@@ -245,7 +245,7 @@ Blocking을 사용하는 IO와는 다르게 NIO에는 Non-Blocking이라는 것�
 
 #### Non-Blocking
 
-![error](../../../assets/images/whiteship-live-study/2021-02-07/non-blocking.png)  
+![error](/assets/images/whiteship-live-study/2021-02-07/non-blocking.png)  
 
 이 그림 한장으로도 앞서 봤던 Blocking의 문제점이 해결된 것을 알 수 있을 것이다.  
 Selector 클래스는 논블로킹 입출력의 핵심이다.  
