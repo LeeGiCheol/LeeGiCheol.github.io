@@ -97,7 +97,7 @@ InputStream은 Reader, OutputStream은 Writer로 바꿔 사용하면 된다.
 단 ByteArrayInputStream의 문자기반 스트림은 CharArrayReader이다.  
 
 | Byte Stream                                         | Character Stream                                                                        |
-| :-------------------------------------------------: | ------------------------------------- |
+| --------------------------------------------------- | ------------------------------------- |
 | FileInputStream <br> FileOutputStream               | FileReader <br> FileWriter            |
 | ByteArrayInputStream <br> ByteArrayOutputStream     | CharArrayReader <br> CharArrayWriter  |
 | PipedInputStream <br> PipedOutputStream             | PipedReader <br> PipedWriter          |
@@ -253,7 +253,7 @@ Selector 클래스는 논블로킹 입출력의 핵심이다.
 이러한 방식은 블로킹 입출력에 비해 훨씬 개선된 리소스 관리 효율을 보여준다.  
 
 Blocking에 비해 Non-Blocking은 구현이 어려운 편이다.  
-Netty나 Mina와 같은 프레임워크를 공부하는것도 좋은 방법이다.  
+Netty나 Mina와 같은 프레임워크를 공부하는것도 좋은 방법이라 생각한다.  
 
 ---
 
