@@ -176,7 +176,12 @@ public class Example {
 ```
 
 사용자 정의 애노테이션이다.  
-@Retention(RetentionPolicy.CLASS) 이라는 옵션은  
+
+```java
+@Retention(RetentionPolicy.CLASS)
+```
+
+위 옵션은  
 컴파일 단계까지만 애노테이션의 기능을 수행한다. 즉 실행 후엔 작동하지 않는다.  
 바이트 코드를 살펴보자.  
 
@@ -184,7 +189,11 @@ public class Example {
 
 메인 메서드에 @MyAnnotation 이 붙어있지만 주석으로 invisible이 되어있다.  
 
-@Retention(RetentionPolicy.CLASS) 옵션은 소스코드까지만 애노테이션의 기능을 수행하는데,  
+```java
+@Retention(RetentionPolicy.CLASS)
+```
+
+위 옵션은 소스코드까지만 애노테이션의 기능을 수행하는데,  
 
 ![error](/assets/images/whiteship-live-study/2021-02-05/retention_source.png)
 
@@ -255,7 +264,8 @@ JVM이 OS에 메모리를 추가적으로 요청했을 때 실행되며,
 
 # 참고
 [선장님 - 인프런 강의 더 자바, 코드를 조작하는 다양한 방법](https://www.inflearn.com/course/the-java-code-manipulation?inst=c160e128)  
-[Jbee님 블로그 - #자바가상머신, JVM(Java Virtual Machine)이란 무엇인가?](https://asfirstalways.tistory.com/158)
+[Jbee님 블로그 - #자바가상머신, JVM(Java Virtual Machine)이란 무엇인가?](https://asfirstalways.tistory.com/158)  
+
 ---
 
 
