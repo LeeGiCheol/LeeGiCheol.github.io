@@ -118,12 +118,209 @@ return 대신 식을 대신해서 사용할 수 있다.
 
 ### 함수형 인터페이스
 
+함수형 인터페이스란 한개의 추상 메서드를 가진 인터페이스를 말한다.  
+Single Abstract Method(SAM)라고 부르기도 한다. (코틀린에서 더 많이 쓰이는 듯 하다.)  
+
+위 예제 LambdaTest 인터페이스에 붙은 @FunctionalInterface 애노테이션이 바로 함수형 인터페이스라고 명시해주는 애노테이션이다.  
+
+![error](/assets/images/whiteship-live-study/2021-03-02/@FunctionalInterface-1.png)  
+![error](/assets/images/whiteship-live-study/2021-03-02/@FunctionalInterface-2.png)  
+
+위와 같이 추상 메서드가 아예 없거나, 한개보다 많다면 컴파일 에러가 발생한다.   
+마치 @Override 처럼 말이다.  
+  
+<br>  
+
+단 default 메서드의 경우는 예외이다.  
+
+![error](/assets/images/whiteship-live-study/2021-03-02/@FunctionalInterface-3.png)  
+
+인터페이스를 구현할때 추상 메서드는 반드시 구현해야 하지만,  
+default 메서드는 필수가 아닌 것을 생각하면 된다.  
+
 ---
 
 ### Variable Capture
 
+람다식은 지변수를 참조할 수 있다.  
+
+![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-1.png)  
+
+![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-2.png)  
+
+단 사용되는 변수는 final 이거나 final 처럼 쓰여야한다.  
+만약 str 이라는 변수의 값이 변한다면 컴파일 에러가 발생한다.
+
+![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-3.png)
+
+참고로 final 처럼 쓰인다는 것. 이 것의 명칭은 effectively final 이다.  
+final 키워드를 붙이진 않았지만, 재할당하지 않고 참조가 변경되지 않는 변수를 effectively final이라 한다.  
+
+#### 왜 final만 가능할까?
+
+위 helloLambda 메서드를 호출한 스레드의 스택에 str 이라는 변수도 만들어진다.
+
+![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-4.png)  
+
+당연하겠지만 stack() 호출이 끝나면 str 변수도 스택에서 제거된다.  
+
+![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-5.png)  
+
+리턴된 람다식은 어떤 스레드에서 다시 호출될지 모르고, str 변수는 이미 사라져버렸으며, 다른 스레드의 스택 영역에 있으므로 접근도 못한다.    
+이런 문제를 해결하기 위해 생긴 기능이  
+변수의 복사본을 만들어 접근하도록 하는 Variable Capture이다.
+
+복사본을 사용하는 것이지만, 람다식이 언제 몇개의 스레드에서 사용될지는 아무도 모르기 때문에  
+final이 아니라면 동기화를 할 수 없기 때문에 final 또는 effectively final을 사용해야한다.
+
+#### 스택??
+
+메서드 호출이 끝나면 스택에서 제거되는 지역변수말고,  
+static 변수나 instance 변수는 어떨까 싶은 의문이 들었다.  
+
+static 변수는 로딩될때 한번, instance 변수는 Heap 영역에 생성되기 때문이다.  
+
+```text 
+static
+```
+
+![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-static.png)   
+
+<br><br>
+
+```text 
+instance
+```
+
+![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-instance.png)   
+
+컴파일 에러가 발생하지도 않은 뿐더러 이상없이 동작한다.  
+
+스태틱변수나 인스턴스변수는 동일한 변수를 참조할 수 있기 때문이다.
+그러면 컴파일러는 람다가 heap 영역 안의 str 값인 즉 가장 최신의 값을 참조하도록 보장할 수 있다.  
+
+대신 Thread Safe 하지 않기 때문에 멀티스레드 환경에서는 주의해서 사용해야 한다.
+
+---
+
+### java.util.function
+
+대부분 메서드의 생김새는 비슷하다.  
+매개변수가 없거나, 한개 또는 두개.  
+리턴값이 있거나, 없거나.  
+
+그렇기 때문에 java.util.function 패키지에  
+자주 쓰이는 메서드 형식을 함수형 인터페이스로 미리 정의해두었다.  
+함수형 인터페이스에 정의된 메서드 이름도 통일되고, 재사용성이나 유지보수도 좋다.  
+그렇기에 가능하면 새로운 함수형 인터페이스를 만드는 것보단  
+이 패키지의 인터페이스를 사용하는 것이 좋다.  
+
+| 함수형 인터페이스       | 메서드                    | 설명                                                      |
+| ------------------- | ----------------------- | -------------------------------------------------------- |
+| java.lang.Runnable  | void run()              | 매개변수 리턴값 없음.                                         |
+| Supplier<T>         | T get()                 | 매개변수는 없고 리턴값은 있음.                                  |
+| Consumer<T>         | void accept(T t)        | 매개변수는 있고 리턴값은 없음.                                  |
+| Function<T, R>      | R apply(T, t)           | 일반적인 함수. 하나의 매개변수를 받아서 결과 리턴                   |
+| Predicate<T>        | boolean test(T t)       | 조건식을 표현하는데 사용한다. 매개변수는 하나. 리턴 타입은 boolean    |
+| BiConsumer<T, U>    | void accept(T t, U u)   | 두 개의 매개변수가 있고, 리턴값이 없음                           |
+| BiPredicate<T, U>   | boolean test(T t, U u)  | 조건식을 표현하는데 사용한다. 매개변수는 둘. 리턴 타입은 boolean      |
+| BiFunction<T, U, R> | R apply(T t, U u)       | 두 개의 매개변수를 받아서 결과 리턴                              |
+
+맨 위 4개의 함수형 인터페이스는 매개변수와 반환값의 유무에 따라 정의되어있고,  
+Predicate는 조건식을 함수로 표현하는데 사용되며 반환값이 boolean인 것을 제외하면 Function과 동일하다.  
+
+```java
+public static void main(String[]args){
+    Predicate<LocalDateTime> now = currentTime -> LocalDateTime.now().isAfter(currentTime);
+    System.out.println(now.test(LocalDateTime.now().minusMinutes(10)));
+}
+```
+
+입력한 시간이 현재 시간보다 이전 시간이라면 true를 반환하는 메서드이다.  
+이런식으로 Predicate를 활용할 수 있다.  
+
+맨 아래 3개는 접두사로 Bi가 붙는다.  
+이는 매개변수가 2개인 함수형 인터페이스이다.  
+
+메서드는 두 개의 값을 리턴할 수 없으므로 BiSupplier는 존재하지 않는다.  
+
+만약 매개변수가 두개보다 많은 경우라면 직접 함수형 인터페이스를 만들어야 한다.  
+
+```java
+// 매개변수가 3개인 경우
+@FunctionalInterface
+public interface TriFunction<T, U, V, R> {
+    R apply(T t, U u, V v);
+}
+
+// 매개변수가 4개인 경우
+@FunctionalInterface
+public interface QuadFunction <T, U, V, W, R> {
+    R apply(T t, U u, V v, W w);
+}
+```
+
 ---
 
 ### 메소드, 생성자 레퍼런스
+
+#### 메서드 레퍼런스
+
+```java
+public int parseInt(String str) {
+    return Integer.parseInt(str);
+}
+```
+
+위와 같은 메서드가 있다.  
+메서드가 굉장히 간단하고 하는일이 크게 없다.  
+이런 경우 메서드 레퍼런스라는 방법으로 메서드를 간략하게 표현할 수 있다.  
+
+먼저 람다식으로 표현하면 아래와 같다.  
+
+```java
+public static void main(String[]args){
+    Function<String, Integer> function = (String s) -> Integer.parseInt(s);        
+}
+```
+
+메서드 레퍼런스를 사용하면 아래와 같이 코드가 간결해진다.  
+
+```java
+public static void main(String[]args){
+    Function<String, Integer> function = Integer::parseInt;        
+}
+```
+
+즉 하나의 메서드만을 호출하는 람다식은  
+클래스이름::메서드 이름 또는 참조변수::메서드 이름으로 변환할 수 있다.  
+
+#### 생성자 레퍼런스
+
+생성자를 호출하는 람다식을 메서드 레퍼런스로 변환할 수 있다.  
+
+```java
+Supplier<ConstructorReferenceClass> s = () -> new ConstructorReferenceClass();  // 람다
+```
+
+```java
+Supplier<ConstructorReferenceClass> s = ConstuctorReference::new;               // 메서드 레퍼런스
+```
+
+만약 생성자에 매개변수가 있다면 이렇게 사용할 수 있다.  
+
+```java
+Function<Integer, ConstructorReferenceClass> s = (i) -> new ConstructorReferenceClass(i);
+Function<Integer, ConstructorReferenceClass> s = ConstructorReferenceClass::new;
+```
+
+매개변수가 두개라면 BiFunction을 사용한다.    
+
+```java
+BiFunction<Integer, Integer,ConstructorReferenceClass> s = ConstructorReferenceClass::new;
+```
+
+메서드 레퍼런스를 사용함으로써 람다식을 마치 static한 변수처럼 다룰 수 있다.  
+
 
 ---
