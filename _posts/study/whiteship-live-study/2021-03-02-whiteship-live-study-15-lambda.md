@@ -124,6 +124,7 @@ Single Abstract Method(SAM)라고 부르기도 한다. (코틀린에서 더 많�
 위 예제 LambdaTest 인터페이스에 붙은 @FunctionalInterface 애노테이션이 바로 함수형 인터페이스라고 명시해주는 애노테이션이다.  
 
 ![error](/assets/images/whiteship-live-study/2021-03-02/@FunctionalInterface-1.png)  
+
 ![error](/assets/images/whiteship-live-study/2021-03-02/@FunctionalInterface-2.png)  
 
 위와 같이 추상 메서드가 아예 없거나, 한개보다 많다면 컴파일 에러가 발생한다.   
@@ -173,12 +174,13 @@ final 키워드를 붙이진 않았지만, 재할당하지 않고 참조가 변�
 복사본을 사용하는 것이지만, 람다식이 언제 몇개의 스레드에서 사용될지는 아무도 모르기 때문에  
 final이 아니라면 동기화를 할 수 없기 때문에 final 또는 effectively final을 사용해야한다.
 
-#### 스택??
+#### 의문. 스택??
 
-메서드 호출이 끝나면 스택에서 제거되는 지역변수말고,  
+지역변수는 메서드 호출이 끝나면 스택에서 제거되니까 그렇다 치고    
 static 변수나 instance 변수는 어떨까 싶은 의문이 들었다.  
 
-static 변수는 로딩될때 한번, instance 변수는 Heap 영역에 생성되기 때문이다.  
+static 변수는 클래스 로딩될때 한번, instance 변수는 Heap 영역에 생성되기 때문이다.  
+바로 테스트해보자.  
 
 ```text 
 static
