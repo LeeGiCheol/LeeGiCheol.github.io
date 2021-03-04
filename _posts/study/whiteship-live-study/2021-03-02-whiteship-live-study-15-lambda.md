@@ -322,7 +322,12 @@ Function<Integer, ConstructorReferenceClass> s = ConstructorReferenceClass::new;
 BiFunction<Integer, Integer,ConstructorReferenceClass> s = ConstructorReferenceClass::new;
 ```
 
-메서드 레퍼런스를 사용함으로써 람다식을 마치 static한 변수처럼 다룰 수 있다.  
+메서드 레퍼런스를 사용함으로써 람다식을 마치 static한 변수처럼 다룰 수 있다.
 
+---
+
+# 참고
+[정아마추어님 블로그](https://jeong-pro.tistory.com/211)  
+[남궁성 - 자바의 정석](http://www.yes24.com/Product/Goods/24259565)
 
 ---
