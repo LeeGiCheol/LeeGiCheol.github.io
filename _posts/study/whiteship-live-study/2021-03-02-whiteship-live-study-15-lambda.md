@@ -302,11 +302,11 @@ public static void main(String[]args){
 생성자를 호출하는 람다식을 메서드 레퍼런스로 변환할 수 있다.  
 
 ```java
-Supplier<ConstructorReferenceClass> s = () -> new ConstructorReferenceClass();  // 람다
+Supplier<ConstructorReferenceClass> constructorReference = () -> new ConstructorReferenceClass();  // 람다
 ```
 
 ```java
-Supplier<ConstructorReferenceClass> s = ConstuctorReference::new;               // 메서드 레퍼런스
+Supplier<ConstructorReferenceClass> constructorReference = ConstuctorReference::new;               // 메서드 레퍼런스
 ```
 
 만약 생성자에 매개변수가 있다면 이렇게 사용할 수 있다.  
