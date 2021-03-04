@@ -312,14 +312,14 @@ Supplier<ConstructorReferenceClass> s = ConstuctorReference::new;               
 만약 생성자에 매개변수가 있다면 이렇게 사용할 수 있다.  
 
 ```java
-Function<Integer, ConstructorReferenceClass> s = (i) -> new ConstructorReferenceClass(i);
-Function<Integer, ConstructorReferenceClass> s = ConstructorReferenceClass::new;
+Function<Integer, ConstructorReferenceClass> constructorReference = (i) -> new ConstructorReferenceClass(i);
+Function<Integer, ConstructorReferenceClass> constructorReference = ConstructorReferenceClass::new;
 ```
 
 매개변수가 두개라면 BiFunction을 사용한다.    
 
 ```java
-BiFunction<Integer, Integer,ConstructorReferenceClass> s = ConstructorReferenceClass::new;
+BiFunction<Integer, Integer, ConstructorReferenceClass> constructorReference = ConstructorReferenceClass::new;
 ```
 
 메서드 레퍼런스를 사용함으로써 람다식을 마치 static한 변수처럼 다룰 수 있다.
