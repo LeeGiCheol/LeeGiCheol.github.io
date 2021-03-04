@@ -143,7 +143,7 @@ default 메서드는 필수가 아닌 것을 생각하면 된다.
 
 ### Variable Capture
 
-람다식은 지변수를 참조할 수 있다.  
+람다식은 지역변수를 참조할 수 있다.  
 
 ![error](/assets/images/whiteship-live-study/2021-03-02/variable-capture-1.png)  
 
