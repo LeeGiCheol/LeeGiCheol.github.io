@@ -406,3 +406,182 @@ member = MEMBER1
 그리고 자유롭게 Member와 Team을 탐색할 수 있다는 것을 알 수 있다.  
 
 ---
+
+##### **양방향 연관관계와 연관관계의 주인 주의점**  
+```java
+Member member = new Member();
+member.setName("MEMBER1");
+em.persist(member);
+
+Team team = new Team();
+team.setName("TEAM_A");
+team.getMembers().add(member);
+
+em.persist(team);
+```
+
+앞서 공부한 것과 같이 위 연관관계의 주인은 Member.team이다.  
+위와 같이 주인이 아닌 Team의 member에 값을 아무리 저장해도 JPA는 DB에 반영하지 않는다.  
+
+실제 DB에 Insert된 값을 보자.  
+
+![error](/assets/images/kyh-jpa-basic/12-notice.png)  
+
+TEAM_iD가 null인 것을 알 수 있다.  
+
+사실상 Member.setTeam(team)을 해주면 값은 정상적으로 들어가지만,  
+객체지향적으로 생각하자면, Member.setTeam(team)과 Team.getMembers().add(member)를 세팅하는 것이 더 올바르다.  
+
+게다가 엔티티가 1차 캐시에 올라간 상태 즉 영속 상태인 경우라면 또 문제가 발생한다.  
+
+```java
+ Team team = new Team();
+team.setName("TEAM_A");
+em.persist(team);
+
+Member member = new Member();
+member.setName("MEMBER1");
+member.setTeam(team);
+em.persist(member);
+
+
+team.getMembers().add(member); // 이 부분을 주석처리하면 m.getName()은 출력되지 않는다.  
+
+Team findTeam = em.find(Team.class, team.getId());
+List<Member> members = findTeam.getMembers();
+
+for (Member m : members) {
+    System.out.println("m = " + m.getName());
+}
+```
+
+만약 위 부분에 주석처리가 되어있고,    
+flush, clear 처리 한 후 등의 영속성 컨텍스트의 관리를 받지 않는 경우라면  
+DB에서 조회를 해오기 때문에 값이 정상적으로 나오겠지만,  
+
+위와 같이 영속상태일 경우 members는 값이 나오지 않는다.  
+1차 캐시에서 조회해오기 때문이다.  
+
+이러한 상황을 대비하기 위해 양방향 연관관계라면  
+양쪽에 값을 설정해야 한다.  
+
+사실 이러한 상황은 실수를 하기 쉽다.  
+
+Member 엔티티에 setTeam()을 할 때 **"연관관계 편의 메서드"** 를 만들어 주는 것이 좋다. 
+
+```java
+@Entity
+public class Member {
+
+    ...
+
+    public void setTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
+
+}
+```
+
+여기서 getter setter는 자바빈의 규약, 관례이기 때문에  
+setTeam보다는 changeTeam 등으로 이름을 변경하는 것이 낫다.  
+
+```java
+@Entity
+public class Member {
+
+    ...
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
+
+}
+```
+
+혹은 연관관계 메서드는 Team 엔티티에 추가해줄 수도 있다.  
+
+```java
+@Entity
+public class Team {
+    
+    ...
+
+    public void addMember(Member member) {
+        member.setTeam(this);
+        members.add(member);
+    }
+
+}
+```
+
+이 부분은 자율적이나, 꼭 둘 중의 한 군데에서만 해야한다.  
+
+---
+
+##### **양방향 연관관계 무한루프**  
+양방향 연관관계는 무한루프가 발생하기 쉽다.  
+
+```java
+@Entity
+public class Member {
+
+    ...
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", team=" + team +
+                '}';
+    }
+
+}
+
+@Entity
+public class Team {
+
+    ...
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", members=" + members +
+                '}';
+    }
+
+}
+```
+
+Member의 toString에서는 team을 Team의 toString에서는 members를 호출한다.  
+딱 봐도 굉장히 불안하다.  
+
+실제로 toString을 호출하면 StackOverflowError가 발생한다.  
+
+lombok을 굉장히 많이 사용할텐데,  
+@Data, @ToString 사용을 자제해야한다. 
+혹시 쓰더라도 team, members는 제외하고 사용한다.
+
+JSON 생성 라이브러리도 마찬가지의 상황으로 무한루프가 발생할 수 있다.  
+엔티티는 DTO를 사용해서 반환하는 방법으로 해결한다.  
+
+---
+
+##### **정리**  
+사실 단방향 매핑만으로도 이미 JPA의 연관관계 매핑은 완료되지만,  
+
+JPQL에서는 역방향으로 탐색할 일이 많기 때문에 양방향 매핑이 아예 필요 없는 건 아니다.  
+
+우선 단방향 매핑을 잘 해두고 설계를 한 후, 양방향 매핑은 필요 시 추가해도 문제 될 일이 없다.  
+양방향 매핑을 추가할때 테이블에 영향을 주지 않기 때문이다.    
+
+<br>  
+
+연관관계의 주인은 비즈니스 로직을 기준으로 선택하는 것이 아니라, 외래키의 위치를 기준으로 정해야 한다.  
+
+
+---
