@@ -173,6 +173,8 @@ public class Team {
 - 주 테이블이나 대상 테이블 중 외래키 선택을 할 수 있다.  
 - 외래키에 데이터베이스 Unique 제약조건이 추가된다.  
 
+---
+
 ##### **일대일 주 테이블에 외래키 단방향**
 
 ![error](/assets/images/kyh-jpa-basic/14-one-to-one.png)   
@@ -281,5 +283,126 @@ public class Locker {
     - 대상 테이블에 외래키가 존재한다.
     - 주 테이블과 대상 테이블을 일대일에서 일대다 관계로 변경할 때 테이블 구조가 유지된다.  
     - 프록시 기능의 한계로 지연 로딩으로 설정해도 항상 즉시 로딩된다.  
+
+---
+
+#### **다대다**
+관계형 데이터베이스는 정규화된 테이블 2개로 다대다 관계를 표현할 수 없다.  
+
+그러나 객체는 컬렉션을 사용하면 객체 2개로 다대다 관계가 가능하다.  
+
+연결 테이블을 추가해서 일대다, 다대일 관계로 풀어내야 한다.  
+이때 JoinTable에 설정한 테이블 이름이 연결 테이블 이름이다.  
+
+```java
+@Entity
+public class Member {
+
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
+
+    @Column(name = "USERNAME")
+    private String name;
+
+    @ManyToMany
+    @JoinTable(name = "MEMBER_PRODUCT ")
+    private List<Product> products = new ArrayList<>();
+
+}
+
+@Entity
+public class Product {
+
+    @Id @GeneratedValue
+    private Long id;
+
+    private String name;
+
+}
+```
+
+양방향으로 만들기 위해선 아래와 같다.  
+
+
+```java
+@Entity
+public class Member {
+
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
+
+    @Column(name = "USERNAME")
+    private String name;
+
+    @ManyToMany
+    @JoinTable(name = "MEMBER_PRODUCT ")
+    private List<Product> products = new ArrayList<>();
+
+}
+
+@Entity
+public class Product {
+
+    @Id @GeneratedValue
+    private Long id;
+
+    private String name;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Member> members = new ArrayList<>();
+
+}
+```
+
+사실 다대다를 사용하는 것은 원하는 쿼리가 나가지 않는 등의 굉장히 불편한 일이 생길 수 있다.  
+그렇기 때문에 중간 테이블인 MEMBER_PRODUCT를 엔티티로 만들고 각각 ManyToOne, @OneToMany로 풀어내는것이 더 적절하다.  
+
+```java
+@Entity
+public class Member {
+
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
+
+    @Column(name = "USERNAME")
+    private String name;
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
+
+}
+
+@Entity
+public class Product {
+
+    @Id @GeneratedValue
+    private Long id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "product")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
+
+}
+
+@Entity
+public class MemberProduct {
+    
+    @Id @GeneratedValue
+    private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member members;
+    
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product products;
+    
+}
+```
 
 ---
