@@ -303,6 +303,15 @@ equals를 통해 비교를 해야하는데, Object 클래스의 equals 메서드
 
 인텔리제이 혹은 이클립스와 같은 IDE를 사용하면 equals와 hashCode를 쉽게 생성해줄 수 있다.  
 
+![error](/assets/images/kyh-jpa-basic/31-equals-hashcode.png)    
+
+인텔리제이를 사용한다면 Use getters during code generation 옵션을 꼭 체크하도록 하자.  
+equals, hashCode 메서드에서 필드에 직접 접근이 아닌  
+getter를 통해 접근하도록 하는 옵션인데,  
+프록시 객체의 경우 필드에 접근했을 때  
+정상적으로 작동하지 않기 때문에 getter를 사용하는 것이 안전하다.  
+
+
 ```java
 @Embeddable
 public class Address {
@@ -315,12 +324,12 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipcode, address.zipcode);
+        return Objects.equals(getCity(), address.getCity()) && Objects.equals(getStreet(), address.getStreet()) && Objects.equals(getZipcode(), address.getZipcode());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(city, street, zipcode);
+        return Objects.hash(getCity(), getStreet(), getZipcode());
     }
 
 }
