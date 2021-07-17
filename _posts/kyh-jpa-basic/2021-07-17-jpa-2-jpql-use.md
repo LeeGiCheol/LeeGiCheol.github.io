@@ -123,9 +123,10 @@ getResultList()를 통해 조회해온 List\<Member\>는 모두 영속성 컨텍
 그 증거로 flush, clear로 영속성 컨텍스트를 비운 후 받아온 reulst에서  
 값을 변경하더라도 UPDATE 쿼리가 발생한다.  
 
-<br>  
+---
 
-- SELECT m.team FROM Member m
+##### **엔티티 프로젝션**  
+- SELECT m.team FROM Member m  
 
 JPQL은 아래와 같은 쿼리가 가능해 굉장히 간편하다.  
 
