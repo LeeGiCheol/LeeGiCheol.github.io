@@ -12,7 +12,7 @@ toc : true
 ---
 
 ### **JPQL 문법**  
-SELECT m FROM Member as m WHERE m.age > 18
+SELECT m FROM Member as m WHERE m.age > 18  
 이전에 JPQL은 쿼리의 대상이 테이블이 아닌, 엔티티라고 공부했다.  
 SELECT, FROM 등의 키워드는 대소문자 구분을 하지 않으나,  
 엔티티와 속성은 대소문자를 구분한다.  
@@ -43,7 +43,8 @@ Query query =
 ---
 
 ##### **getResultList, getSingleResult**  
-TypeQuery 혹은 Query로 반환된 객체를 통해 리스트 또는 단일 객체를 반환받을 수 있다.  
+TypeQuery 혹은 Query로 반환된 객체를 통해  
+리스트 또는 단일 객체를 반환받을 수 있다.  
 
 - query.getResultList : 쿼리의 결과가 하나 이상일 때 리스트 반환  
     - 결과가 없으면 빈 리스트 반환  
@@ -51,7 +52,8 @@ TypeQuery 혹은 Query로 반환된 객체를 통해 리스트 또는 단일 객
     - 결과가 없으면 : javax.persistence.NoResultException  
     - 둘 이상이면 : javax.persistence.NonUniqueResultException  
 
-getSingleResult는 결과가 없더라도 예외가 발생하기 때문에 주의해서 사용해야 한다.  
+getSingleResult는 결과가 없더라도  
+예외가 발생하기 때문에 주의해서 사용해야 한다.  
 Spring Data JPA는 결과가 없다면 null을 반환한다.  
 
 ---
@@ -61,7 +63,8 @@ Spring Data JPA는 결과가 없다면 null을 반환한다.
 위치를 기준으로 바인딩을 하면 실수가 발생할 수 있기 때문에  
 이름을 기준으로 바인딩 하는 것이 좋다.  
 
-- 이름 기준
+- 이름 기준  
+
 ```java
 Member singleResult = em.createQuery(
                     "SELECT m FROM Member m WHERE m.username = :username", Member.class)
@@ -71,7 +74,8 @@ Member singleResult = em.createQuery(
 System.out.println("singleResult.getUsername() = " + singleResult.getUsername());
 ```
 
-- 위치 기준
+- 위치 기준  
+
 ```java
 Member singleResult = em.createQuery(
                     "SELECT m FROM Member m WHERE m.username = :1", Member.class)
@@ -115,8 +119,9 @@ getResultList()를 통해 조회해온 List\<Member\>는 모두 영속성 컨텍
 그 증거로 flush, clear로 영속성 컨텍스트를 비운 후 받아온 reulst에서  
 값을 변경하더라도 UPDATE 쿼리가 발생한다.  
 
-<br>  
+---
 
+##### **엔티티 프로젝션**  
 - SELECT m.team FROM Member m : 엔티티 프로젝션
 
 JPQL은 아래와 같은 쿼리가 가능해 굉장히 간편하다.  
@@ -138,6 +143,9 @@ List<Team> resultList = em.createQuery(
         .getResultList();
 ```
 
+---
+
+##### **임베디드 타입 프로젝션**  
 - SELECT m.address FROM Member m : 임베디드 타입 프로젝션  
 
 아래와 같이 임베디드 타입으로 객체를 반환 받을 수 있다.  
@@ -148,6 +156,9 @@ List<Address> resultList = em.createQuery(
         .getResultList();
 ```
 
+---
+
+##### **스칼라 타입 프로젝션**  
 - SELECT m.username, m.age FROM Member m : 스칼라 타입 프로젝션
 
 아래와 같이 기본 데이터 타입을 조회할 수 있다.  
@@ -160,8 +171,9 @@ em.createQuery("SELECT m.username, m.age FROM Member m");
 
 ---
 
-##### **스칼라 타입 프로젝션 반환 객체**  
+###### **스칼라 타입 프로젝션 반환 객체**  
 1. Query 타입  
+
 ```java
 Query query = 
     em.createQuery("SELECT m.username, m.age FROM Member m");
@@ -182,6 +194,7 @@ System.out.println("age = " + result[1]);
 ```
 
 3. new 키워드  
+
 ```java
 public class MemberDto {
 
@@ -509,16 +522,19 @@ Member{id=2, username='LEE', age=26}
 
 ##### **ON 절**  
 
-JPA 2.1부터 ON절을 활용한 조인이 가능해져 조인 대상을 필터링 할 수 있다.  
+JPA 2.1부터 ON절을 활용한 조인이 가능해져  
+조인 대상을 필터링 할 수 있다.  
 
-Hibernate 5.1부터 세타조인과 같은 연관관계가 없는 엔티티를 외부 조인 할 수 있다.  
+Hibernate 5.1부터 세타조인과 같은  
+연관관계가 없는 엔티티를 외부 조인 할 수 있다.  
 (기존에는 내부조인만 가능했다.)  
 
 ---
 
 ###### **ON절이란?**  
 ON절은 테이블을 조인할 때 범위를 조건으로 주며,  
-WHERE절은 조인을 한 후에 조건을 주어 최종 결과를 내기 위한 키워드이다.  
+WHERE절은 조인을 한 후에 조건을 주어  
+최종 결과를 내기 위한 키워드이다.  
 
 ---
 
@@ -632,7 +648,7 @@ Hibernate:
 ##### **서브 쿼리 지원 함수**  
 - [NOT] EXISTS (subquery) : 서브쿼리에 결과가 존재하면 참  
 
-- { ALL | ANY | SOME } (subquery)  
+- \{ ALL | ANY | SOME \} (subquery)
     - ALL : 모두 만족하면 참  
     - ANY, SOME : 같은 의미, 조건을 하나라도 만족하면 참   
 
@@ -643,6 +659,7 @@ Hibernate:
 ##### **JPA 서브 쿼리의 한계**  
 JPA는 WHERE, HAVING절에서만 서브쿼리를 사용할 수 있다.  
 Hibernate에서는 SELECT절에서도 서브쿼리를 사용할 수 있다.  
+
 대부분의 경우 Hibernate를 구현한 JPA를 쓰기 때문에  
 JPA에서 SELECT절에 서브쿼리도 가능하다고 볼 수 있다.  
 
@@ -932,7 +949,8 @@ result = null
 ##### **JPQL 사용자 정의 함수**  
 사용자 정의 함수를 사용하기 위해서는 직접 함수를 추가해줘야한다.  
 
-먼저 H2 DB 기준으로 H2Dialect 클래스를 상속받고, 생성자에 함수를 추가해준다.  
+먼저 H2 DB 기준으로 H2Dialect 클래스를 상속받고,  
+생성자에 함수를 추가해준다.  
 
 ```java
 public class MyH2Dialect extends H2Dialect {
@@ -953,7 +971,8 @@ persistence.xml 파일의 Dialect를 MyH2Dialect로 수정한다.
 
 여기까지가 등록 과정이다.  
 
-FUNCTION 함수를 사용하고, 그 안에 매개변수로 추가한 함수명을 작성해서 사용한다.  
+FUNCTION 함수를 사용하고,  
+그 안에 매개변수로 추가한 함수명을 작성해서 사용한다.  
 
 ```java
 String query = "SELECT FUNCTION('GROUP_CONCAT', m.username) FROM Member m";
