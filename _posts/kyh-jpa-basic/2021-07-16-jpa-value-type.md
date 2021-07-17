@@ -101,6 +101,7 @@ public class Member {
 
 - @Embeddable : 값 타입을 정의하는 곳에 표시  
 - @Embedded : 값 타입을 사용하는 곳에 표시  
+    - @Embeddable이 있다면 필수로 사용할 필요는 없지만 명확하게 값 타입이라는 것을 알리기 위해 사용하도록 한다.    
 
 ```java
 @Entity
