@@ -24,6 +24,9 @@ JPA는 트랜잭션안에서 커밋된 시점에 flush를 한다.
 바로 이 시점에 DB의 데이터와 엔티티의 데이터의 변경을 감지해서  
 Update를 실행해준다.  
 
+주의사항으로는 Dirty Checking의 대상은 영속 상태이며,  
+준영속 상태, 비영속 상태는 Dirty Checking의 대상이 아니다.  
+
 ```java
 @Transactional
 @GetMapping("/")
