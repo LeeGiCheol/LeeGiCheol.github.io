@@ -103,10 +103,16 @@ Book은 영속성 컨텍스트에 관리 대상이 아니다.
 Dirty Checking의 대상이 되려면 영속상태로 변경해주면 된다.  
 
 ```java
-@PostMapping("/books/edit")
-public String updateBook(@ModelAttribute BookForm bookForm) {
-    Book book = bookService.updateBook(bookForm);
-    return "redirect:/books";
+@Controller
+@RequiredArgsConstructor
+public class BookController {
+        
+    @PostMapping("/books/edit")
+    public String updateBook(@ModelAttribute BookForm bookForm) {
+        Book book = bookService.updateBook(bookForm);
+        return "redirect:/books";
+    }
+
 }
 ```
 
@@ -229,7 +235,7 @@ public class BookController {
 
     private final BookService bookService;
 
-    @PostMapping("/books/{bookId}/edit")
+    @PostMapping("/books/edit")
     public String updateBook(@ModelAttribute BookForm bookForm) {
         Book book = bookService.createBook(bookForm);
         bookService.saveBook(book);
@@ -367,7 +373,8 @@ merge를 한 경우 merge를 하고 받은 entity를 반환하는 것을 알 수
 ###### **Merge 주의사항**  
 Dirty Checking을 하면 변경된 데이터만 선택해서 변경할 수 있다.  
 그러나 Merge는 모든 속성이 변경된다.  
-변경될 엔티의 한 필드에 값이 없다면 DB에 null로 업데이트 된다.   
+변경될 엔티티의 한 필드에 값이 없다면  
+해당 필드는 DB에 null로 업데이트 된다.   
 
 보통은 Update문을 사용할 때  
 전체 데이터를 사용하는 것보단, 필요한 데이터만 변경할 일이 훨씬 많다..  
