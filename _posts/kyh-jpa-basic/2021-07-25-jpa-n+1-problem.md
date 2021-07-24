@@ -132,7 +132,7 @@ public class FindOrdersResponseDto {
 DTO를 리턴해서 무한루프가 해결됬지만 N+1 문제가 말썽이다.  
 우선 쿼리부터 확인해보자..  
 
-```SQL
+```sql
 hibernate.SQL                        : 
     select
         orders0_.id as id1_0_,
