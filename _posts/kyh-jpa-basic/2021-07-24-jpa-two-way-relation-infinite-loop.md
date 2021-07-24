@@ -226,7 +226,7 @@ implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.12.
 
 버전은 여기서 확인할 수 있다.  
 
-https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate5
+[Maven Repository](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate5)
 
 의존성을 추가했다면 빈 설정을 해줘야한다.  
 
