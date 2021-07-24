@@ -472,7 +472,7 @@ public class FindUsersNewResponseDto {
 이와같이 FindOrdersNewResponseDto 에서  
 Users를 사용하지 않고 FindUsersNewResponseDto를 사용했다.  
 
-DTO로 래핑을 하더라도 안에 사용되는 필드가 엔티티면 안된다.    
+DTO로 래핑을 하더라도 안에 사용되는 필드가 엔티티인 것은 좋지 않다.    
 그렇기때문에 엔티티를 래핑할 클래스를 따로 만든 것이다.  
 
 ---
