@@ -3,7 +3,7 @@ title : "Spring Bean Scope - Singleton Scope"
 categories : 
     - java
 tag :
-    - Mockito
+    - spring
 toc : true
 ---
 
