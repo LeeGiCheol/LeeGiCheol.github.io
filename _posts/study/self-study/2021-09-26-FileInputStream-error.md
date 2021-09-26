@@ -8,7 +8,7 @@ toc : true
 ---
 
 ```java
-public void fileCallSuccess() throws IOException {
+public void fileCallFail() throws IOException {
     Resource resource = new ClassPathResource(this.NUMBER_PATH);
     String path = resource.getFile().getAbsolutePath();
 }
