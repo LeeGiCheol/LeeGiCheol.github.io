@@ -188,8 +188,13 @@ public static void main(String[] args) {
 
 ### **ExcelMaker**
 
+아래부터는 Apache POI를 활용해 엑셀 다운로드를 할 수 있는    
+ExcelMaker의 예시이다.  
+
+---
+
 #### **클라이언트 구현 예시**  
-아래는 클라이언트에서 사용하는 경우이다.  
+클라이언트에서 사용하는 경우이다.  
 
 ```java
 @RestController
