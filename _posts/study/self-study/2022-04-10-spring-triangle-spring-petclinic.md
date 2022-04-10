@@ -668,11 +668,11 @@ public class OwnerController {
 
 #### **참고자료**
 
-[Component Scan - [스프링 핵심기술] - @Component와 @ComponentScan - 짱호](https://jjingho.tistory.com/9)    
+[[스프링 핵심기술] - @Component와 @ComponentScan - 짱호](https://jjingho.tistory.com/9)    
 
-[생성자 주입을 사용해야 하는 이유 - [Spring] 다양한 의존성 주입 방법과 생성자 주입을 사용해야 하는 이유 - (2/2) - 망나니개발자](https://mangkyu.tistory.com/125)  
+[[Spring] 다양한 의존성 주입 방법과 생성자 주입을 사용해야 하는 이유 - (2/2) - 망나니개발자](https://mangkyu.tistory.com/125)  
 
-[PSA - [Spring] PSA(Portable Service Abstraction)란?](https://dev-coco.tistory.com/83)    
+[[Spring] PSA(Portable Service Abstraction)란?](https://dev-coco.tistory.com/83)    
 
 
 ---
