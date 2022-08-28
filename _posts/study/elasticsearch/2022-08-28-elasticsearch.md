@@ -248,7 +248,7 @@ Elasticsearch는 2016년 1월을 기점으로 현재까지 검색 엔진 중 인
 
 ### 문법
 
-[elastic-search postman-documentation](https://documenter.getpostman.com/view/13360793/VUxKT9DD#d53b8f25-43b8-4b3f-b43e-7b1cdb5cbe60)  
+[elastic-search postman-documentation](https://documenter.getpostman.com/view/13360793/VUxKT9DD)  
 
 [elasticsearch postman api](/assets/images/study/2022-08-29-elasticsearch/21.elasticsearch-postman.json)
 
