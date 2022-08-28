@@ -1,0 +1,2783 @@
+{
+	"info": {
+		"_postman_id": "92be013b-29ba-44e5-b80a-88b1b7a03cbc",
+		"name": "elastic-search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13360793"
+	},
+	"item": [
+		{
+			"name": "01. 도큐먼트 삽입",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"LEEGICHEOL\",\r\n    \"message\": \"Hello ElasticSearch\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es1:9200/my_index/_doc/1",
+					"protocol": "http",
+					"host": [
+						"es1"
+					],
+					"port": "9200",
+					"path": [
+						"my_index",
+						"_doc",
+						"1"
+					]
+				},
+				"description": "### 도큐먼트 삽입\n\n```\n1.http://{HOST_NAME}:{PORT}/{INDEX_NAME}/_doc/{DOCUMENT_ID} \n2.http://{HOST_NAME}:{PORT}/{INDEX_NAME}/_doc\n\n```\n\n위 URL을 통해 {INDEX_ID}의 도큐먼트를 추가할 수 있다.\n\n*   Body는 JSON 형식으로 `column:value` 형태로 값을 전달한다.\n*   최초 데이터 삽입 시 응답 값의 result 필드는 `created` 이다.\n*   동일한 {INDEX_ID}로 요청할 시 데이터는 덮어 씌워지며 result 필드는 `updated`로 표시된다.\n*   중복 삽입을 방지하기 위한다면 _create URI를 사용한다. (데이터 중복 삽입 방지 (Create) 참조\n    *   중복 삽입 시 `version conflict, document already exists` 에러가 발생한다.\n\nDOCUMENT_ID를 생략할 경우 `_id`가 자동 생성 된다.\n\n이때 PUT 메서드로는 자동 생성이 불가능 하다."
+			},
+			"response": [
+				{
+					"name": "도큐먼트 삽입 - 최초 삽입",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"LEEGICHEOL\",\r\n    \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 1,\n    \"result\": \"created\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 1,\n        \"failed\": 0\n    },\n    \"_seq_no\": 0,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 삽입 - 최초 삽입 (Kibana)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "PUT my_index/_doc/1\r\n{\r\n  \"name\": \"LEEGICHEOL\",\r\n  \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 1,\n    \"result\": \"created\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 1,\n        \"failed\": 0\n    },\n    \"_seq_no\": 0,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 삽입 - 중복 삽입",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"LEEGICHEOL\",\r\n    \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 2,\n    \"result\": \"updated\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 1,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 삽입 - 중복 삽입 (Kibana)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "PUT my_index/_doc/1\r\n{\r\n  \"name\": \"LEEGICHEOL\",\r\n  \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 2,\n    \"result\": \"updated\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 1,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 중복 삽입 방지 - 성공 케이스",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"LEEGICHEOL\",\r\n    \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_create/11",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_create",
+								"11"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"11\",\n    \"_version\": 1,\n    \"result\": \"created\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 17,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 중복 삽입 방지 - 성공 케이스 (Kibana)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "PUT my_index/_create/1\r\n{\r\n  \"name\":\"LEEGICHEOL\",\r\n  \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_create/11",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_create",
+								"11"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"11\",\n    \"_version\": 1,\n    \"result\": \"created\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 17,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 중복 삽입 방지 - 실패 케이스",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"LEEGICHEOL\",\r\n    \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_create/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_create",
+								"1"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"root_cause\": [\n            {\n                \"type\": \"version_conflict_engine_exception\",\n                \"reason\": \"[1]: version conflict, document already exists (current version [10])\",\n                \"index_uuid\": \"xzqxaNWPTHyJ5FyY0tud9A\",\n                \"shard\": \"0\",\n                \"index\": \"my_index\"\n            }\n        ],\n        \"type\": \"version_conflict_engine_exception\",\n        \"reason\": \"[1]: version conflict, document already exists (current version [10])\",\n        \"index_uuid\": \"xzqxaNWPTHyJ5FyY0tud9A\",\n        \"shard\": \"0\",\n        \"index\": \"my_index\"\n    },\n    \"status\": 409\n}"
+				},
+				{
+					"name": "도큐먼트 중복 삽입 방지 - 실패 케이스 (Kibana)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "PUT my_index/_create/1\r\n{\r\n  \"name\":\"LEEGICHEOL\",\r\n  \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_create/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_create",
+								"1"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"root_cause\": [\n            {\n                \"type\": \"version_conflict_engine_exception\",\n                \"reason\": \"[1]: version conflict, document already exists (current version [10])\",\n                \"index_uuid\": \"xzqxaNWPTHyJ5FyY0tud9A\",\n                \"shard\": \"0\",\n                \"index\": \"my_index\"\n            }\n        ],\n        \"type\": \"version_conflict_engine_exception\",\n        \"reason\": \"[1]: version conflict, document already exists (current version [10])\",\n        \"index_uuid\": \"xzqxaNWPTHyJ5FyY0tud9A\",\n        \"shard\": \"0\",\n        \"index\": \"my_index\"\n    },\n    \"status\": 409\n}"
+				},
+				{
+					"name": "도큐먼트 삽입 - _id 자동생성",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"LEEGICHEOL\",\r\n    \"message\": \"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_doc",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"TolLYYIBxjwI42ohmQna\",\n    \"_version\": 1,\n    \"result\": \"created\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 1,\n        \"failed\": 0\n    },\n    \"_seq_no\": 0,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 삽입 - _id 자동생성 (Kibana)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "POST my_index/_doc\r\n{\r\n    \"name\": \"LEEGICHEOL\",\r\n    \"message\":\"Hello ElasticSearch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_doc",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"TolLYYIBxjwI42ohmQna\",\n    \"_version\": 1,\n    \"result\": \"created\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 1,\n        \"failed\": 0\n    },\n    \"_seq_no\": 0,\n    \"_primary_term\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "02. 도큐먼트 수정",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"doc\": {\r\n        \"name\": \"CHEEOLEE\"\r\n    }   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es1:9200/my_index/_update/1",
+					"protocol": "http",
+					"host": [
+						"es1"
+					],
+					"port": "9200",
+					"path": [
+						"my_index",
+						"_update",
+						"1"
+					]
+				},
+				"description": "### 도큐먼트 수정\n\n```\nhttp://{HOST_NAME}:{PORT}/{INDEX_NAME}/_update/{DOCUMENT_ID}\n\n```\n\n위 URL을 통해 {INDEX_ID}의 도큐먼트를 수정 할 수 있다.\n\n*   Body는 JSON 형식으로 Column : Value 형태로 값을 전달하면, 해당하는 필드의 데이터가 업데이트 된다.\n*   이때 Body는 `doc`으로 감싸져 있어야 한다.\n*   존재하지 않는 필드를 입력한다면, 신규 필드가 생성된다.\n*   사실 말이 update이지 내부적으로는 도큐먼트의 전체 내용을 읽고, `_doc`에서 지정한 수정 내용/신규 필드를 수정하여 새로운 도큐먼트를 만들어 `PUT`을 하는 방식을 사용한다."
+			},
+			"response": [
+				{
+					"name": "도큐먼트 수정",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doc\": {\r\n        \"name\": \"CHEEOLEE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_update/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_update",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 2,\n    \"result\": \"updated\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 2,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 수정 (Kibana)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "POST my_index/_update/1\r\n{\r\n    \"doc\": {\r\n        \"name\": \"CHEEOLEE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_update/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_update",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 2,\n    \"result\": \"updated\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 2,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 수정 - 없는 필드 추가",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doc\": {\r\n        \"age\": 27\r\n    }   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_update/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_update",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 3,\n    \"result\": \"updated\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 2,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 수정 - 없는 필드 추가 (Kibana)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "POST my_index/_update/1\r\n{\r\n    \"doc\": {\r\n        \"age\": 27\r\n    }   \r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es1:9200/my_index/_update/1",
+							"protocol": "http",
+							"host": [
+								"es1"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_update",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 3,\n    \"result\": \"updated\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 2,\n    \"_primary_term\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "03. 도큐먼트 조회",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/my_index/_doc/100",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"my_index",
+						"_doc",
+						"100"
+					]
+				},
+				"description": "### 도큐먼트 조회\n\n```\nhttp://{HOST_NAME}:{PORT}/{INDEX_NAME}/_doc/{DOCUMENT_ID} \n\n```\n\n위 URL을 통해 {INDEX_ID}의 도큐먼트를 조회 할 수 있다.\n\n*   `_source` 항목에 도큐먼트의 내용이 출력 된다."
+			},
+			"response": [
+				{
+					"name": "도큐먼트 조회",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 1,\n    \"_seq_no\": 0,\n    \"_primary_term\": 1,\n    \"found\": true,\n    \"_source\": {\n        \"name\": \"LEEGICHEOL\",\n        \"message\": \"Hello ElasticSearch\"\n    }\n}"
+				},
+				{
+					"name": "도큐먼트 조회 (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET my_index/_doc/1",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 1,\n    \"_seq_no\": 0,\n    \"_primary_term\": 1,\n    \"found\": true,\n    \"_source\": {\n        \"name\": \"LEEGICHEOL\",\n        \"message\": \"Hello ElasticSearch\"\n    }\n}"
+				},
+				{
+					"name": "도큐먼트 조회 - 실패 케이스",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_doc/100",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_doc",
+								"100"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"100\",\n    \"found\": false\n}"
+				},
+				{
+					"name": "도큐먼트 조회 - 실패 케이스 (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET my_index/_doc/100",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_doc/100",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_doc",
+								"100"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"100\",\n    \"found\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "04. 인덱스/도큐먼트 삭제",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/my_index",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"my_index"
+					]
+				},
+				"description": "### 도큐먼트 삭제\n\n```\n1.http://{HOST_NAME}:{PORT}/{INDEX_NAME}\n2.http://{HOST_NAME}:{PORT}/{INDEX_NAME}/_doc/{DOCUMENT_ID}\n\n```\n\n위 URL을 통해 인덱스 또는 도큐먼트를 삭제할 수 있다.\n\n*   인덱스를 삭제할 경우 `\"acknowledged\" : true` 를 리턴한다.\n*   도큐먼트를 삭제할 경우 `\"result\" : \"deleted\"` 를 리턴한다."
+			},
+			"response": [
+				{
+					"name": "인덱스 삭제",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"acknowledged\": true\n}"
+				},
+				{
+					"name": "인덱스 삭제 (Kibana)",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "DELETE my_index",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"acknowledged\": true\n}"
+				},
+				{
+					"name": "도큐먼트 삭제",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 2,\n    \"result\": \"deleted\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 1,\n    \"_primary_term\": 1\n}"
+				},
+				{
+					"name": "도큐먼트 삭제 (Kibana)",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "DELETE my_index/_doc/1",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_doc/1",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"_index\": \"my_index\",\n    \"_type\": \"_doc\",\n    \"_id\": \"1\",\n    \"_version\": 2,\n    \"result\": \"deleted\",\n    \"_shards\": {\n        \"total\": 2,\n        \"successful\": 2,\n        \"failed\": 0\n    },\n    \"_seq_no\": 1,\n    \"_primary_term\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "05. Bulk",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"index\":{\"_index\":\"test\", \"_id\":\"1\"}}\r\n{\"field\":\"value one\"}\r\n{\"index\":{\"_index\":\"test\", \"_id\":\"2\"}}\r\n{\"field\":\"value two\"}\r\n{\"delete\":{\"_index\":\"test\", \"_id\":\"2\"}}\r\n{\"create\":{\"_index\":\"test\", \"_id\":\"3\"}}\r\n{\"field\":\"value three\"}\r\n{\"update\":{\"_index\":\"test\", \"_id\":\"1\"}}\r\n{\"doc\":{\"field\":\"value two\"}}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/_bulk",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"_bulk"
+					]
+				},
+				"description": "### Bulk 삽입\n\n```\nhttp://{HOST_NAME}:{PORT}/_bulk\n\n```\n\n위 URL을 통해 Bulk 삽입을 할 수 있다.\n\n*   대량 데이터를 삽일 할 경우 `_bulk api`가 더 효율적이다.\n*   Postman에서 테스트 할 경우 `End of file expected.` 에러가 발생한다.\n    *   마지막 라인에 빈 라인 한 줄을 추가하면 정상 작동한다. (\\\\n)\n*   bulk 삽입을 할 데이터를 json 형태로 파일화 하고, 파일을 불러와 삽입 할 수 있다.\n    *   cURL 사용 시 파일 명 앞에 `@`를 붙여야 한다.\n\n```\ncurl -XPOST \"http://localhost:9200/_bulk\" -H 'Content-Type: application/json' --data-binary @bulk.json\n\n```"
+			},
+			"response": [
+				{
+					"name": "Bulk",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"index\":{\"_index\":\"test\", \"_id\":\"1\"}}\r\n{\"field\":\"value one\"}\r\n{\"index\":{\"_index\":\"test\", \"_id\":\"2\"}}\r\n{\"field\":\"value two\"}\r\n{\"delete\":{\"_index\":\"test\", \"_id\":\"2\"}}\r\n{\"create\":{\"_index\":\"test\", \"_id\":\"3\"}}\r\n{\"field\":\"value three\"}\r\n{\"update\":{\"_index\":\"test\", \"_id\":\"1\"}}\r\n{\"doc\":{\"field\":\"value two\"}}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/_bulk",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"_bulk"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Bulk (Kibana)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "POST _bulk\r\n{\"index\":{\"_index\":\"test\", \"_id\":\"1\"}}\r\n{\"field\":\"value one\"}\r\n{\"index\":{\"_index\":\"test\", \"_id\":\"2\"}}\r\n{\"field\":\"value two\"}\r\n{\"delete\":{\"_index\":\"test\", \"_id\":\"2\"}}\r\n{\"create\":{\"_index\":\"test\", \"_id\":\"3\"}}\r\n{\"field\":\"value three\"}\r\n{\"update\":{\"_index\":\"test\", \"_id\":\"1\"}}\r\n{\"doc\":{\"field\":\"value two\"}}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/_bulk",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"_bulk"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 213,\n    \"errors\": false,\n    \"items\": [\n        {\n            \"index\": {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 1,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 0,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        },\n        {\n            \"index\": {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 1,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 1,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        },\n        {\n            \"delete\": {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_version\": 2,\n                \"result\": \"deleted\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 1,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 2,\n                \"_primary_term\": 1,\n                \"status\": 200\n            }\n        },\n        {\n            \"create\": {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 1,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 3,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        },\n        {\n            \"update\": {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_version\": 2,\n                \"result\": \"updated\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 1,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 4,\n                \"_primary_term\": 1,\n                \"status\": 200\n            }\n        },\n        {\n            \"create\": {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 1,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 5,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "06. URI 조회",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/test/_search?q=value",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"test",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "value"
+						}
+					]
+				},
+				"description": "### URI 조회\n\n```\n1.http://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search?q={VALUE}\n2.http://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search?q={FIELD}:{VALUE}\n\n```\n\n위 URL을 통해 URI 조회를 할 수 있다.\n\n*   쿼리 스트링을 사용한 조회 방식이다.\n*   `q`는 기본 검색 파라미터이다. (query)\n*   `{VALUE}`는 field의 value값이다.\n*   응답값의 `hits.total.value` 값은 검색 결과의 전체 개수이다.\n*   응답값의 `hits.hits: []` 값은 검색 결과 중 가장 정확도가 높은 10건을 출력한다.\n*   `AND , OR , NOT` 과 같은 연산자도 사용할 수 있다. (example 참고)\n*   1번 URL은 전체 field 중 value를 찾는데 비해 2번 URL과 같이 `{FIELD}:{VALUE}` 형태로 요청 할 시, 해당 field만을 지정하여 조회한다."
+			},
+			"response": [
+				{
+					"name": "URI 조회",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=value",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "value"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 3,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.08701137,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 0.08701137,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            },\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_score\": 0.08701137,\n                \"_source\": {\n                    \"field\": \"value two\"\n                }\n            },\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.08701137,\n                \"_source\": {\n                    \"field\": \"value four\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 조회 (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET test/_search?q=value",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=value",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "value"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 2,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.10536051,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 0.10536051,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            },\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_score\": 0.10536051,\n                \"_source\": {\n                    \"field\": \"value two\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 조회 AND",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=value AND three",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "value AND three"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.4733056,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1.4733056,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 조회 AND (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET test/_search?q=value AND three",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=value AND three",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "value AND three"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3093333,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1.3093333,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 조회 OR",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=three OR four",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "three OR four"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 2,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3862942,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1.3862942,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            },\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 1.3862942,\n                \"_source\": {\n                    \"field\": \"value four\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 조회 OR (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET test/_search?q=three OR four",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=three OR four",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "three OR four"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3093333,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1.3093333,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 조회 NOT",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=NOT three",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "NOT three"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 2,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.0,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_score\": 0.0,\n                \"_source\": {\n                    \"field\": \"value two\"\n                }\n            },\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.0,\n                \"_source\": {\n                    \"field\": \"value four\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 조회 NOT (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET test/_search?q=NOT three",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=NOT three",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "NOT three"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 2,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.0,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_score\": 0.0,\n                \"_source\": {\n                    \"field\": \"value two\"\n                }\n            },\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.0,\n                \"_source\": {\n                    \"field\": \"value four\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 필드 조회",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=field:four",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "field:four"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3862942,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 1.3862942,\n                \"_source\": {\n                    \"field\": \"value four\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "URI 필드 조회 (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET test/_search?q=field:four",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search?q=field:four",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "field:four"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3862942,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 1.3862942,\n                \"_source\": {\n                    \"field\": \"value four\"\n                }\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "07. 데이터 본문 조회",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"field\": \"three\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/test/_search",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"test",
+						"_search"
+					]
+				},
+				"description": "### URI 조회\n\n```\n1.http://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search?q={VALUE}\n2.http://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search?q={FIELD}:{VALUE}\n\n```\n\n위 URL을 통해 URI 조회를 할 수 있다.\n\n*   쿼리 스트링을 사용한 조회 방식이다.\n*   `q`는 기본 검색 파라미터이다. (query)\n*   `{VALUE}`는 field의 value값이다.\n*   응답값의 `hits.total.value` 값은 검색 결과의 전체 개수이다.\n*   응답값의 `hits.hits: []` 값은 검색 결과 중 가장 정확도가 높은 10건을 출력한다.\n*   `AND , OR , NOT` 과 같은 연산자도 사용할 수 있다. (example 참고)\n*   1번 URL은 전체 field 중 value를 찾는데 비해 2번 URL과 같이 `{FIELD}:{VALUE}` 형태로 요청 할 시, 해당 field만을 지정하여 조회한다."
+			},
+			"response": [
+				{
+					"name": "데이터 본문 조회 match",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"field\": \"three\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/test/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"test",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 1,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3862942,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1.3862942,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "08. MultiTenancy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/logs_2022_08*/_search",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"logs_2022_08*",
+						"_search"
+					]
+				},
+				"description": "### Multi Tenancy\n\n```\n1.http://{HOST_NAME}:{PORT}/{INDEX_NAME},{INDEX_NAME},{INDEX_NAME}/_search\n2.http://{HOST_NAME}:{PORT}/{INDEX_NAME}*/_search\n3.http://{HOST_NAME}:{PORT}/_all/_search\n\n```\n\n위 URL을 통해 Multi Tenancy 조회를 할 수 있다.\n\n*   Multi Tenancy는 여러 개의 인덱스를 한꺼번에 묶어서 조회하는 방법이다.\n*   인덱스를 `,` 로 구분, 또는 `*`로 여러 인덱스를 조회 할 수 있다.\n*   3번의 경우 전체 인덱스를 조회 할 수 있으나, 시스템 인덱스까지 조회해 불필요한 데이터까지 접근하기 때문에 되도록 사용하지 않도록 한다."
+			},
+			"response": [
+				{
+					"name": "MultiTenancy - 1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/logs_2022_08_03,logs_2022_08_04,logs_2022_08_05/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"logs_2022_08_03,logs_2022_08_04,logs_2022_08_05",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 4,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 3,\n    \"successful\" : 3,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 3,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"logs_2022_08_03\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"LEE\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_04\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"GI\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_05\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"CHEOL\"\n        }\n      }\n    ]\n  }\n}\n"
+				},
+				{
+					"name": "MultiTenancy - 1 (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET logs_2022_08_03,logs_2022_08_04,logs_2022_08_05/_search",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/logs_2022_08_03,logs_2022_08_04,logs_2022_08_05/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"logs_2022_08_03,logs_2022_08_04,logs_2022_08_05",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 4,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 3,\n    \"successful\" : 3,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 3,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"logs_2022_08_03\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"LEE\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_04\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"GI\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_05\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"CHEOL\"\n        }\n      }\n    ]\n  }\n}\n"
+				},
+				{
+					"name": "MultiTenancy - 2",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/logs_2022_08*/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"logs_2022_08*",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 4,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 3,\n    \"successful\" : 3,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 3,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"logs_2022_08_03\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"LEE\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_04\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"GI\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_05\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"CHEOL\"\n        }\n      }\n    ]\n  }\n}\n"
+				},
+				{
+					"name": "MultiTenancy - 2 (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET logs_2022_08*/_search",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/logs_2022_08*/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"logs_2022_08*",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 4,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 3,\n    \"successful\" : 3,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 3,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"logs_2022_08_03\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"LEE\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_04\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"GI\"\n        }\n      },\n      {\n        \"_index\" : \"logs_2022_08_05\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"name\" : \"CHEOL\"\n        }\n      }\n    ]\n  }\n}\n"
+				},
+				{
+					"name": "MultiTenancy - all",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/_all/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"_all",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 26,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 23,\n        \"successful\": 23,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3862942,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1.3862942,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "MultiTenancy - all (Kibana)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "GET _all/_search",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/_all/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"_all",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 26,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 23,\n        \"successful\": 23,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 1,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1.3862942,\n        \"hits\": [\n            {\n                \"_index\": \"test\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1.3862942,\n                \"_source\": {\n                    \"field\": \"value three\"\n                }\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "09. match all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"match_all\": {\r\n      \r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/my_index/_search",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"my_index",
+						"_search"
+					]
+				},
+				"description": "### Match All\n\n```\nhttp://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search\n\n```\n\n위 URL을 통해 match_all 조회를 할 수 있다.\n\n*   match_all 조회는 인덱스 내 전체 검색이며, 검색 시 쿼리를 넣지 않는다면, 자동으로 match_all을 적용한다."
+			},
+			"response": [
+				{
+					"name": "match all body",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"match_all\": {\r\n      \r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 5,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 1,\n        \"hits\": [\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_score\": 1,\n                \"_source\": {\n                    \"message\": \"The quick brown fox\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_score\": 1,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the lazy dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 1,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the quick dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 1,\n                \"_source\": {\n                    \"message\": \"Brown fox brown dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"5\",\n                \"_score\": 1,\n                \"_source\": {\n                    \"message\": \"Lazy jumping dog\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "match all",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "10. Full Text Query",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"message\": \"dog\"\r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/my_index/_search",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"my_index",
+						"_search"
+					]
+				},
+				"description": "### Full Text Query\n\n```\nhttp://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search\n\n```\n\n위 URL을 통해 Full Text Query를 할 수 있다.\n\n*   `match` 쿼리는 가장 일반적인 쿼리 형태이다.\n    *   `message` 필드의 `value`가 포함되어 있는 도큐먼트를 조회한다.\n    *   `match` 쿼리는 구분자를(공백) 통해 여러개의 검색 조건을 넣을 수 있는데, 이때 `OR` 조건으로 조회된다.\n    *   `AND` 조건으로 조회하기 위해서는 `operator` 옵션을 사용해야 한다.\n*   만약 `quick dog` 라는 검색어가 두 개의 조건이 아니라, 공백까지 한 문장이라면, `match_phrase`를 사용한다.\n    *   `slop` 옵션은 공백으로 구분된 `value`의 값 사이 얼마 만큼의 단어가 있을지를 결정 할 수 있다. 만약 `jumps dog` 검색어에 `slop`이 3이면 `The quick brown fox jumps over the lazy dog` 이 검색 될 수 있다.\n*   `query_string`은 루씬의 검색 문법이며, syntax를 강력하게 체크한다. 또한 여러 조건을 조합하기 용이한 문법이다."
+			},
+			"response": [
+				{
+					"name": "match",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"message\": \"dog\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 4,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.35847887,\n        \"hits\": [\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"5\",\n                \"_score\": 0.35847887,\n                \"_source\": {\n                    \"message\": \"Lazy jumping dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.32951736,\n                \"_source\": {\n                    \"message\": \"Brown fox brown dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the lazy dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the quick dog\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "match OR",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"message\": \"quick dog\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 5,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.87627405,\n        \"hits\": [\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 0.87627405,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the quick dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_score\": 0.6744513,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the lazy dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_score\": 0.6173784,\n                \"_source\": {\n                    \"message\": \"The quick brown fox\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"5\",\n                \"_score\": 0.35847887,\n                \"_source\": {\n                    \"message\": \"Lazy jumping dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.32951736,\n                \"_source\": {\n                    \"message\": \"Brown fox brown dog\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "match AND",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"message\": {\r\n        \"query\": \"quick dog\",\r\n        \"operator\": \"and\"\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 3,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 1,\n    \"successful\" : 1,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 2,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 0.87627405,\n    \"hits\" : [\n      {\n        \"_index\" : \"my_index\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"3\",\n        \"_score\" : 0.87627405,\n        \"_source\" : {\n          \"message\" : \"The quick brown fox jumps over the quick dog\"\n        }\n      },\n      {\n        \"_index\" : \"my_index\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"2\",\n        \"_score\" : 0.6744513,\n        \"_source\" : {\n          \"message\" : \"The quick brown fox jumps over the lazy dog\"\n        }\n      }\n    ]\n  }\n}\n"
+				},
+				{
+					"name": "match_phrase",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"match_phrase\": {\r\n      \"message\": \"quick dog\"\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 4,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.35847887,\n        \"hits\": [\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"5\",\n                \"_score\": 0.35847887,\n                \"_source\": {\n                    \"message\": \"Lazy jumping dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.32951736,\n                \"_source\": {\n                    \"message\": \"Brown fox brown dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the lazy dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the quick dog\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "match_phrase slop",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"match_phrase\": {\r\n      \"message\": {\r\n        \"query\": \"jumps dog\",\r\n        \"slop\": 3\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 4,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.35847887,\n        \"hits\": [\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"5\",\n                \"_score\": 0.35847887,\n                \"_source\": {\n                    \"message\": \"Lazy jumping dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.32951736,\n                \"_source\": {\n                    \"message\": \"Brown fox brown dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the lazy dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the quick dog\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "query_string",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"query_string\": {\r\n      \"default_field\": \"message\",\r\n      \"query\": \"(jumping AND lazy) OR \\\"quick dog\\\"\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 2,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 4,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": 0.35847887,\n        \"hits\": [\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"5\",\n                \"_score\": 0.35847887,\n                \"_source\": {\n                    \"message\": \"Lazy jumping dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_score\": 0.32951736,\n                \"_source\": {\n                    \"message\": \"Brown fox brown dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the lazy dog\"\n                }\n            },\n            {\n                \"_index\": \"my_index\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_score\": 0.23470736,\n                \"_source\": {\n                    \"message\": \"The quick brown fox jumps over the quick dog\"\n                }\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "11. Bool Query",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"must\": [\r\n        {\r\n          \"match\": {\r\n            \"message\": \"quick\"\r\n          }\r\n        },\r\n        {\r\n          \"match_phrase\": {\r\n            \"message\": \"lazy dog\"\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/my_index/_search",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"my_index",
+						"_search"
+					]
+				},
+				"description": "### Bool Query\n\n```\nhttp://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search\n\n```\n\n위 URL을 통해 Bool Query를 할 수 있다.\n\n*   query_string은 여러 조건을 조합하기 용이하지만, 옵션이 한정되어 있다.\n*   본문 검색에서 여러 쿼리를 조합하기 위해선 bool 쿼리를 사용하도록 한다.\n*   bool 쿼리의 인자는 다음과 같다.\n    \n\n| **인자** | **설명** |\n| --- | --- |\n| must | 쿼리가 참인 도큐먼트 검색 |\n| must_not | 쿼리가 거짓인 도큐먼트 검색 |\n| should | 쿼리 결과 중 should의 쿼리에 해당하는 도큐먼트에 가중치를 줘 우선 순위가 된다. (스코어 ↑) |\n| filter | 쿼리가 참인 도큐먼트를 검색하나, 스코어를 계산하지 않아 must보다 검색 속도가 빠르고 캐싱이 가능하다. |"
+			},
+			"response": [
+				{
+					"name": "bool must",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"must\": [\r\n        {\r\n          \"match\": {\r\n            \"message\": \"quick\"\r\n          }\r\n        },\r\n        {\r\n          \"match_phrase\": {\r\n            \"message\": \"lazy dog\"\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"took\" : 2,\r\n  \"timed_out\" : false,\r\n  \"_shards\" : {\r\n    \"total\" : 1,\r\n    \"successful\" : 1,\r\n    \"skipped\" : 0,\r\n    \"failed\" : 0\r\n  },\r\n  \"hits\" : {\r\n    \"total\" : {\r\n      \"value\" : 1,\r\n      \"relation\" : \"eq\"\r\n    },\r\n    \"max_score\" : 1.3887084,\r\n    \"hits\" : [\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"2\",\r\n        \"_score\" : 1.3887084,\r\n        \"_source\" : {\r\n          \"message\" : \"The quick brown fox jumps over the lazy dog\"\r\n        }\r\n      }\r\n    ]\r\n  }\r\n}\r\n"
+				},
+				{
+					"name": "bool must_not",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"should\": [\r\n        {\r\n          \"match\": {\r\n            \"message\": \"quick\"\r\n          }\r\n        },\r\n        {\r\n          \"match_phrase\": {\r\n            \"message\": \"lazy dog\"\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"took\" : 2,\r\n  \"timed_out\" : false,\r\n  \"_shards\" : {\r\n    \"total\" : 1,\r\n    \"successful\" : 1,\r\n    \"skipped\" : 0,\r\n    \"failed\" : 0\r\n  },\r\n  \"hits\" : {\r\n    \"total\" : {\r\n      \"value\" : 2,\r\n      \"relation\" : \"eq\"\r\n    },\r\n    \"max_score\" : 0.0,\r\n    \"hits\" : [\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"4\",\r\n        \"_score\" : 0.0,\r\n        \"_source\" : {\r\n          \"message\" : \"Brown fox brown dog\"\r\n        }\r\n      },\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"5\",\r\n        \"_score\" : 0.0,\r\n        \"_source\" : {\r\n          \"message\" : \"Lazy jumping dog\"\r\n        }\r\n      }\r\n    ]\r\n  }\r\n}\r\n"
+				},
+				{
+					"name": "bool should",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"must\": [\r\n        {\r\n          \"match\": {\r\n            \"message\": \"quick\"\r\n          }\r\n        }\r\n      ],\r\n      \"should\": [\r\n        {\r\n          \"match\": {\r\n            \"message\": \"fox\"\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"took\" : 3,\r\n  \"timed_out\" : false,\r\n  \"_shards\" : {\r\n    \"total\" : 1,\r\n    \"successful\" : 1,\r\n    \"skipped\" : 0,\r\n    \"failed\" : 0\r\n  },\r\n  \"hits\" : {\r\n    \"total\" : {\r\n      \"value\" : 3,\r\n      \"relation\" : \"eq\"\r\n    },\r\n    \"max_score\" : 0.9468958,\r\n    \"hits\" : [\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"1\",\r\n        \"_score\" : 0.9468958,\r\n        \"_source\" : {\r\n          \"message\" : \"The quick brown fox\"\r\n        }\r\n      },\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"3\",\r\n        \"_score\" : 0.87627405,\r\n        \"_source\" : {\r\n          \"message\" : \"The quick brown fox jumps over the quick dog\"\r\n        }\r\n      },\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"2\",\r\n        \"_score\" : 0.6744513,\r\n        \"_source\" : {\r\n          \"message\" : \"The quick brown fox jumps over the lazy dog\"\r\n        }\r\n      }\r\n    ]\r\n  }\r\n}\r\n"
+				},
+				{
+					"name": "bool filter",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"filter\": [\r\n        {\r\n          \"match\": {\r\n            \"message\": \"quick\"\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/my_index/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"my_index",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"took\" : 1,\r\n  \"timed_out\" : false,\r\n  \"_shards\" : {\r\n    \"total\" : 1,\r\n    \"successful\" : 1,\r\n    \"skipped\" : 0,\r\n    \"failed\" : 0\r\n  },\r\n  \"hits\" : {\r\n    \"total\" : {\r\n      \"value\" : 3,\r\n      \"relation\" : \"eq\"\r\n    },\r\n    \"max_score\" : 0.0,\r\n    \"hits\" : [\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"1\",\r\n        \"_score\" : 0.0,\r\n        \"_source\" : {\r\n          \"message\" : \"The quick brown fox\"\r\n        }\r\n      },\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"2\",\r\n        \"_score\" : 0.0,\r\n        \"_source\" : {\r\n          \"message\" : \"The quick brown fox jumps over the lazy dog\"\r\n        }\r\n      },\r\n      {\r\n        \"_index\" : \"my_index\",\r\n        \"_type\" : \"_doc\",\r\n        \"_id\" : \"3\",\r\n        \"_score\" : 0.0,\r\n        \"_source\" : {\r\n          \"message\" : \"The quick brown fox jumps over the quick dog\"\r\n        }\r\n      }\r\n    ]\r\n  }\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "12. Range Query",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "leegc130",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"price\": {\r\n        \"gte\": 700,\r\n        \"lt\": 900\r\n      }\r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://es3:9200/my_index/_search",
+					"protocol": "http",
+					"host": [
+						"es3"
+					],
+					"port": "9200",
+					"path": [
+						"my_index",
+						"_search"
+					]
+				},
+				"description": "### Range Query\n\n```\nhttp://{HOST_NAME}:{PORT}/{INDEX_NAME}/_search\n\n```\n\n위 URL을 통해 Range Query를 할 수 있다.\n\n*   숫자/날짜 형태의 범위 검색을 한다.\n*   range 쿼리의 인자는 다음과 같다.\n    \n\n| **인자** | **설명** |\n| --- | --- |\n| gte | 같거나 큼 |\n| gt | 큼 |\n| lte | 같거나 작음 |\n| lt | 작음 |\n\n*   비교 대상 날짜의 formatting이 다른 경우 `||`를 사용하여 적용할 수 있다.\n    *   예를 들어 2022-01-01 \\~ 2023년 이전 까지의 데이터를 뽑고 싶다면, `yyyy-MM-dd||yyyy`라고 입력한다. (example Range Query Date Format1 \\~ 2 참조)\n*   `2016-01-01||+6M` , `now-365d` 와 같은 방식으로 비교 인자를 사용 할 수 있다.\n    *   2016-01-01||+6M : 2016년 1월 1일에서 6개월 후인 날\n    *   now-365d : 오늘보다 365일 전인 날"
+			},
+			"response": [
+				{
+					"name": "dummy data",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"index\":{\"_id\":1}}\r\n{\"model\":\"Samsung GalaxyS 5\",\"price\":475,\"date\":\"2014-02-24\"}\r\n{\"index\":{\"_id\":2}}\r\n{\"model\":\"Samsung GalaxyS 6\",\"price\":795,\"date\":\"2015-03-15\"}\r\n{\"index\":{\"_id\":3}}\r\n{\"model\":\"Samsung GalaxyS 7\",\"price\":859,\"date\":\"2016-02-21\"}\r\n{\"index\":{\"_id\":4}}\r\n{\"model\":\"Samsung GalaxyS 8\",\"price\":959,\"date\":\"2017-03-29\"}\r\n{\"index\":{\"_id\":5}}\r\n{\"model\":\"Samsung GalaxyS 9\",\"price\":1059,\"date\":\"2018-02-25\"}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/phones/_bulk",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"phones",
+								"_bulk"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 236,\n    \"errors\": false,\n    \"items\": [\n        {\n            \"index\": {\n                \"_index\": \"phones\",\n                \"_type\": \"_doc\",\n                \"_id\": \"1\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 2,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 0,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        },\n        {\n            \"index\": {\n                \"_index\": \"phones\",\n                \"_type\": \"_doc\",\n                \"_id\": \"2\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 2,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 1,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        },\n        {\n            \"index\": {\n                \"_index\": \"phones\",\n                \"_type\": \"_doc\",\n                \"_id\": \"3\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 2,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 2,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        },\n        {\n            \"index\": {\n                \"_index\": \"phones\",\n                \"_type\": \"_doc\",\n                \"_id\": \"4\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 2,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 3,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        },\n        {\n            \"index\": {\n                \"_index\": \"phones\",\n                \"_type\": \"_doc\",\n                \"_id\": \"5\",\n                \"_version\": 1,\n                \"result\": \"created\",\n                \"_shards\": {\n                    \"total\": 2,\n                    \"successful\": 2,\n                    \"failed\": 0\n                },\n                \"_seq_no\": 4,\n                \"_primary_term\": 1,\n                \"status\": 201\n            }\n        }\n    ]\n}"
+				},
+				{
+					"name": "Range Query Integer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"price\": {\r\n        \"gte\": 700,\r\n        \"lt\": 900\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/phones/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"phones",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"took\": 1,\n    \"timed_out\": false,\n    \"_shards\": {\n        \"total\": 1,\n        \"successful\": 1,\n        \"skipped\": 0,\n        \"failed\": 0\n    },\n    \"hits\": {\n        \"total\": {\n            \"value\": 0,\n            \"relation\": \"eq\"\n        },\n        \"max_score\": null,\n        \"hits\": []\n    }\n}"
+				},
+				{
+					"name": "Range Query Date",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"date\": {\r\n        \"gte\": \"2015-01-01\",\r\n        \"lt\": \"2018-12-31\",\r\n        \"format\": \"yyyy-MM-dd\"\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/phones/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"phones",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 2,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 1,\n    \"successful\" : 1,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 4,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"2\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 6\",\n          \"price\" : 795,\n          \"date\" : \"2015-03-15\"\n        }\n      },\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"3\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 7\",\n          \"price\" : 859,\n          \"date\" : \"2016-02-21\"\n        }\n      },\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"4\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 8\",\n          \"price\" : 959,\n          \"date\" : \"2017-03-29\"\n        }\n      },\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"5\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 9\",\n          \"price\" : 1059,\n          \"date\" : \"2018-02-25\"\n        }\n      }\n    ]\n  }\n}"
+				},
+				{
+					"name": "Range Query Date Format",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"date\": {\r\n        \"gte\": \"2014-01-01\",\r\n        \"lt\": \"2015\",\r\n        \"format\": \"yyyy-MM-dd||yyyy\"\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/phones/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"phones",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 2,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 1,\n    \"successful\" : 1,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 1,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"1\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 5\",\n          \"price\" : 475,\n          \"date\" : \"2014-02-24\"\n        }\n      }\n    ]\n  }\n}\n"
+				},
+				{
+					"name": "Range Query Date Format2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"date\": {\r\n        \"gte\": \"31/12/2015\",\r\n        \"lt\": \"2018\",\r\n        \"format\": \"dd/MM/yyyy||yyyy\"\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/phones/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"phones",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 2,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 1,\n    \"successful\" : 1,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 2,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"3\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 7\",\n          \"price\" : 859,\n          \"date\" : \"2016-02-21\"\n        }\n      },\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"4\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 8\",\n          \"price\" : 959,\n          \"date\" : \"2017-03-29\"\n        }\n      }\n    ]\n  }\n}\n"
+				},
+				{
+					"name": "Range Query Date Format3",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"date\": {\r\n        \"gt\": \"2016-01-01||+6M\",\r\n        \"lt\": \"now-365d\"\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://es3:9200/phones/_search",
+							"protocol": "http",
+							"host": [
+								"es3"
+							],
+							"port": "9200",
+							"path": [
+								"phones",
+								"_search"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"took\" : 2,\n  \"timed_out\" : false,\n  \"_shards\" : {\n    \"total\" : 1,\n    \"successful\" : 1,\n    \"skipped\" : 0,\n    \"failed\" : 0\n  },\n  \"hits\" : {\n    \"total\" : {\n      \"value\" : 2,\n      \"relation\" : \"eq\"\n    },\n    \"max_score\" : 1.0,\n    \"hits\" : [\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"3\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 7\",\n          \"price\" : 859,\n          \"date\" : \"2016-02-21\"\n        }\n      },\n      {\n        \"_index\" : \"phones\",\n        \"_type\" : \"_doc\",\n        \"_id\" : \"4\",\n        \"_score\" : 1.0,\n        \"_source\" : {\n          \"model\" : \"Samsung GalaxyS 8\",\n          \"price\" : 959,\n          \"date\" : \"2017-03-29\"\n        }\n      }\n    ]\n  }\n}\n"
+				}
+			]
+		}
+	]
+}
