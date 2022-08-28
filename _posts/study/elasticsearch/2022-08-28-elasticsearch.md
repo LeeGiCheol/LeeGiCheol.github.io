@@ -18,8 +18,8 @@ toc : true
     - [Multi Tenancy](#multi-tenancy)
     - [Rest API](#rest-api)
 - [Elasticsearch 인기도](#elasticsearch-인기도)
-    - [검색엔진](#errorassetsimagesstudy2022-08-29-elasticsearch19-searchengine-rankingpng)
-    - [전체 Database](#errorassetsimagesstudy2022-08-29-elasticsearch20-alldb-rankingpng)
+    - [검색엔진](#elasticsearch-인기도)
+    - [전체 Database](#elasticsearch-인기도)
 - [문법](#문법)
 
 ![error](/assets/images/study/2022-08-29-elasticsearch/1-elasticsearch.png)
@@ -248,9 +248,9 @@ Elasticsearch는 2016년 1월을 기점으로 현재까지 검색 엔진 중 인
 
 ### 문법
 
-[elastic-search](https://documenter.getpostman.com/view/13360793/VUxKT9DD)  
+[elastic-search postman-documentation](https://documenter.getpostman.com/view/13360793/VUxKT9DD#d53b8f25-43b8-4b3f-b43e-7b1cdb5cbe60)  
 
-[elasticsearch-postman](/assets/images/study/2022-08-29-elasticsearch/21.elasticsearch-postman.json)
+[elasticsearch postman api](/assets/images/study/2022-08-29-elasticsearch/21.elasticsearch-postman.json)
 
 ---
 
