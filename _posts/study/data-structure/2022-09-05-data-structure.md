@@ -68,7 +68,7 @@ toc : true
 
 ### 스택 (Stack)
 
-[error](/assets/images/study/2022-09-05-data-structure/02-stack.png)  
+![error](/assets/images/study/2022-09-05-data-structure/02-stack.png)  
 
 스택은 한쪽으로만 데이터를 넣고 뺄 수 있는 구조의 자료구조이다.
 
