@@ -807,6 +807,16 @@ public class Dispatch {
 
 ---
 
+## Visitor Pattern
+
+Visitor Pattern은 기존 코드를 수정하지 않고 새로운 기능을 추가하는 방법을 제안하는 패턴이다.
+
+Visitor Pattern을 사용하면 Double Dispatch를 사용할 수 있으며,
+
+Double Dispatch는 Visitor Pattern의 더 근본적인 형태라고 볼 수 있다.
+
+---
+
 ## 출처
 
 [토비의 봄 TV 1회 - 재사용성과 다이나믹 디스패치, 더블 디스패치 - YouTube](https://www.notion.so/TV-1-YouTube-2ae9c18e0a63439185151a894a0d458c)
