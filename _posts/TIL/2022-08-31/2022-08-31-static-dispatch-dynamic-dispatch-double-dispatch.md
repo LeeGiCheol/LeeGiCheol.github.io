@@ -26,7 +26,6 @@ toc : true
     
     - **Component**
         
-        <aside>
         💡 *“Component는 이를 만든 개발자의 손이 미치지 않는 곳에서도 
         아무 변경 없이 필요에 따라 확장할 수 있는 소프트웨어 덩어리이다.”*
         
@@ -36,11 +35,8 @@ toc : true
         
         [bliki: SoftwareComponent](https://martinfowler.com/bliki/SoftwareComponent.html)
         
-        </aside>
-        
         - **Object Pattern**
             
-            <aside>
             💡 “***오브젝트 패턴**은 **런타임시에** 바뀔 수 있는, 
             (상속 관계보다) 더 동적인 오브젝트 (의존) 관계를 다룬다.”
             
@@ -51,7 +47,6 @@ toc : true
             
             ![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/03-object-pattern.png)
             
-            </aside>
             
 
 Dependency는 컴파일 타임이 아니라, 런타임시에 `결정 / 구성`되는 오브젝트 의존 관계이다.
@@ -65,10 +60,8 @@ Dependency는 컴파일 타임이 아니라, 런타임시에 `결정 / 구성`�
     
 - Inversion of Control
     
-    <aside>
     💡 *Designing Reusable Classes (**Ralph Johnson)***
     
-    </aside>
     
 
 ---
@@ -503,20 +496,16 @@ instanceof는 객체지향적이지 못하다는 치명적인 단점이 있다.
     
     객체지향원칙(SOLID) 의 `S` 인 `Single Responsibility Principle` 을 위배한다.
     
-    <aside>
     💡 ***Single Responseibility Principle : 클래스는 하나의 기능 , 하나의 책임만을 가져야 한다.***
     
-    </aside>
     
 
 1. 구현체가 늘어날때마다 일일이 instanceof로 분기를 해주어야 하기 때문에, 
     
     객체 확장 시 항상 변화가 필요하다. 이것은 객체지향원칙의 `O` 인 `Open-Closed Principle`을 위배한다.
     
-    <aside>
     💡 ***Open-Closed Principle : 객체의 확장에는 열려있고, 변화에는 닫혀있어야 한다.***
     
-    </aside>
     
 
 1. instanceof는 컴파일 시점에 모든 구현체를 확인해서 비교하기 때문에 
@@ -617,14 +606,12 @@ Post 인터페이스에 메서드를 정의할 때 파라미터로 구현 클래
 
 어떤 메서드를 실행시켜야 할지 모르기 때문에 컴파일 에러가 발생하게 된다.
 
-<aside>
-💡 ***A Simple Technique for Handling Multiple Polymorphism***
-  ***다형성이 다수 발생할 때 어떻게 해결할지에 대한 논문.
-- Daniel H. H. Ingalls***
+💡 [***A Simple Technique for Handling Multiple Polymorphism***](https://algoritmos-iii.github.io/assets/bibliografia/simple-technique-for-handling-multiple-polymorphism.pdf)
 
-[](https://algoritmos-iii.github.io/assets/bibliografia/simple-technique-for-handling-multiple-polymorphism.pdf)
+_다형성이 다수 발생할 때 어떻게 해결할지에 대한 논문._
+_Daniel H. H. Ingalls_
 
-</aside>
+
 
 ---
 
