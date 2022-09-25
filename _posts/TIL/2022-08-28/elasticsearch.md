@@ -22,9 +22,9 @@ toc : true
     - [전체 Database](#elasticsearch-인기도)
 - [문법](#문법)
 
-![error](/assets/images/study/2022-08-29-elasticsearch/1-elasticsearch.png)
+![error](/assets/images/study/TTL/2022-08-28/1-elasticsearch.png)
 
-![error](/assets/images/study/2022-08-29-elasticsearch/2-apache-lucene.png)
+![error](/assets/images/study/TTL/2022-08-28/2-apache-lucene.png)
 
 Apache Lucene은 Hadoop의 창안자 ***`Doug Cutting`***에 의해 만들어졌다.
 
@@ -68,14 +68,14 @@ Elasticsearch의 경우 데이터를 저장할 때 역색인 구조로 저장하
 
 이것은 책 맨 뒷장의 키워드를 통해 페이지를 찾을 수 있는 찾아보기 페이지와 유사하다.
 
-![error](/assets/images/study/2022-08-29-elasticsearch/3-toby-spring.png)
+![error](/assets/images/study/TTL/2022-08-28/3-toby-spring.png)
 
 ---
 
 ## Text Analysis
 
 
-![error](/assets/images/study/2022-08-29-elasticsearch/4-text-analysis.png)
+![error](/assets/images/study/TTL/2022-08-28/4-text-analysis.png)
 
 공백을 기준으로 단어가 분리되었고, 이때 분리된 단어를 각각  Term이라고 한다.
 
@@ -85,7 +85,7 @@ Elasticsearch의 경우 데이터를 저장할 때 역색인 구조로 저장하
 
 이 과정을 Text Analysis라고 하며, 이 과정을 처리하는 기능을 Analyzer 라고 한다.
 
-![error](/assets/images/study/2022-08-29-elasticsearch/5-analyzer.png)
+![error](/assets/images/study/TTL/2022-08-28/5-analyzer.png)
 
 Analyzer는 Character filter 0~3개, Tokenizer 1개, Token filter 0~n개를 가진다.
 
@@ -93,20 +93,20 @@ Analyzer는 Character filter 0~3개, Tokenizer 1개, Token filter 0~n개를 가�
     
     → HTML 태그 제거, 미리 만들어둔 Mapping Table에서 key 값과 일치하는 value 값으로 치환, 정규식 치환 등 텍스트를 깔끔하게 만들어주는 역할
     
-    ![error](/assets/images/study/2022-08-29-elasticsearch/6-character-filters.png)
+    ![error](/assets/images/study/TTL/2022-08-28/6-character-filters.png)
     
     ---
     
 2. **Tokenizer** : 정해진 Separator를 기준으로 토큰을 분리한다.
     
     → Standard : 공백으로 Term을 분리하며, 일부 특수문자 제거한다.
-    ![error](/assets/images/study/2022-08-29-elasticsearch/7-tokenizer-standard.png)  
+    ![error](/assets/images/study/TTL/2022-08-28/7-tokenizer-standard.png)  
     
     → Letter : 알파벳 제외한 공백, 숫자, 기호를 기준으로 Term을 분리한다.
-    ![error](/assets/images/study/2022-08-29-elasticsearch/8-tokenizer-letter.png)  
+    ![error](/assets/images/study/TTL/2022-08-28/8-tokenizer-letter.png)  
     
     → Whitespace : 스페이스, 탭, 줄바꿈과 같은 공백만을 기준으로 Term을 분리한다.
-    ![error](/assets/images/study/2022-08-29-elasticsearch/9-tokenizer-whitespace.png)
+    ![error](/assets/images/study/TTL/2022-08-28/9-tokenizer-whitespace.png)
     
     ---
     
@@ -114,12 +114,12 @@ Analyzer는 Character filter 0~3개, Tokenizer 1개, Token filter 0~n개를 가�
     
     → 대소문자를 구분하지 않기 위해 사용하는 **LowerCase, UpperCase** 
     
-    ![error](/assets/images/study/2022-08-29-elasticsearch/10-token-filters-uppercase.png)
+    ![error](/assets/images/study/TTL/2022-08-28/10-token-filters-uppercase.png)
     
     → 의미 상 크게 중요하지 않은 불용어를 제거하는 **Stop**
-    ![error](/assets/images/study/2022-08-29-elasticsearch/11-stop.png)
+    ![error](/assets/images/study/TTL/2022-08-28/11-stop.png)
     
-    ![error](/assets/images/study/2022-08-29-elasticsearch/12-stop.png)
+    ![error](/assets/images/study/TTL/2022-08-28/12-stop.png)
     
     → 동의어를 추가하는 ****Synonym****     
     
@@ -167,9 +167,9 @@ Analyzer는 Character filter 0~3개, Tokenizer 1개, Token filter 0~n개를 가�
     ```
     
 
-![error](/assets/images/study/2022-08-29-elasticsearch/13-synonym.png)
+![error](/assets/images/study/TTL/2022-08-28/13-synonym.png)
 
-![error](/assets/images/study/2022-08-29-elasticsearch/14-synonym.png)
+![error](/assets/images/study/TTL/2022-08-28/14-synonym.png)
 
 ---
 
@@ -204,10 +204,10 @@ PUT my_log_2022_0829/_doc/1
 ```
 
 → 2022년 8월 특정 일자만 조회하는 경우 
-![error](/assets/images/study/2022-08-29-elasticsearch/15-multi-tenancy.png)
+![error](/assets/images/study/TTL/2022-08-28/15-multi-tenancy.png)
 
 → 2022년 8월 전체를 조회하는 경우
-![error](/assets/images/study/2022-08-29-elasticsearch/16-multi-tenancy.png)
+![error](/assets/images/study/TTL/2022-08-28/16-multi-tenancy.png)
 
 ---
 
@@ -215,9 +215,9 @@ PUT my_log_2022_0829/_doc/1
 
 ~~Elasticsearch 창시자 Shay Banon은 트위터 계정이 진짜 김치이다.~~
 
-![error](/assets/images/study/2022-08-29-elasticsearch/17-gur-kimchi.png)
+![error](/assets/images/study/TTL/2022-08-28/17-gur-kimchi.png)
 
-![error](/assets/images/study/2022-08-29-elasticsearch/18.shay-banon.png)
+![error](/assets/images/study/TTL/2022-08-28/18.shay-banon.png)
 
 ---
 
@@ -239,10 +239,10 @@ Elasticsearch는 JSON 형태의 Rest API로 데이터를 요청 하는데,
 ## Elasticsearch 인기도
 
 Elasticsearch는 2016년 1월을 기점으로 현재까지 검색 엔진 중 인기도 1위를 유지하고 있다.  
-#### ![error](/assets/images/study/2022-08-29-elasticsearch/19-searchengine-ranking.png)  
+#### ![error](/assets/images/study/TTL/2022-08-28/19-searchengine-ranking.png)  
 
 전체 Database 인기 순위에서도 8위로 높은 순위이다.  
-#### ![error](/assets/images/study/2022-08-29-elasticsearch/20-alldb-ranking.png)
+#### ![error](/assets/images/study/TTL/2022-08-28/20-alldb-ranking.png)
 
 ---
 
@@ -250,11 +250,11 @@ Elasticsearch는 2016년 1월을 기점으로 현재까지 검색 엔진 중 인
 
 [elastic-search postman-documentation](https://documenter.getpostman.com/view/13360793/VUxKT9He)  
 
-[elasticsearch postman api](/assets/images/study/2022-08-29-elasticsearch/21.elasticsearch-postman.json)
+[elasticsearch postman api](/assets/images/study/TTL/2022-08-28/21.elasticsearch-postman.json)
 
 ---
 
-![error](/assets/images/study/2022-08-29-elasticsearch/22.elk.svg)
+![error](/assets/images/study/TTL/2022-08-28/22.elk.svg)
 
 - 출처
 

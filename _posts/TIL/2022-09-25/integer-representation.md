@@ -44,7 +44,7 @@ toc : true
 
 그리고 2진수는 순차적으로 진행을 하는데, 10진수는 이상하게 값이 진행한다.
 
-![Untitled](/assets/images/study/2022-09-25/01-%EB%B6%80%ED%98%B8%ED%99%94%EC%A0%88%EB%8C%80%EC%B9%98.png)
+![Untitled](/assets/images/study/TTL/2022-09-25/01-%EB%B6%80%ED%98%B8%ED%99%94%EC%A0%88%EB%8C%80%EC%B9%98.png)
 
 ### 1의 보수
 
@@ -73,7 +73,7 @@ toc : true
 
 이것을 10진수로 다시 변환하면 0이 되고, 음수이기 때문에 -0이 된다.
 
-![Untitled](/assets/images/study/2022-09-25/02-1%EC%9D%98%EB%B3%B4%EC%88%98.png)
+![Untitled](/assets/images/study/TTL/2022-09-25/02-1%EC%9D%98%EB%B3%B4%EC%88%98.png)
 
 2진수 값의 위치를 이동 시켜 보면 1의 보수는 수가 순환하는 것을 볼 수 있다.
 
@@ -102,7 +102,7 @@ toc : true
 
 여기서 1을 더해 001로 만든 후 10진수로 변환하면 1이되고, 음수이기 때문에 -1이 된다.
 
-![Untitled](/assets/images/study/2022-09-25/03-2%EC%9D%98%EB%B3%B4%EC%88%98.png)
+![Untitled](/assets/images/study/TTL/2022-09-25/03-2%EC%9D%98%EB%B3%B4%EC%88%98.png)
 
 이제 0이 중복되지 않고, 일반적인 수 체계를 갖춘 것을 알 수 있다.
 
@@ -126,7 +126,7 @@ toc : true
 
 소수점 아래 수는 가수, 10의 제곱수는 지수, 그리고 +와 -는 부호로 분리하여 표기한다.
 
-![Untitled](/assets/images/study/2022-09-25/04-IEEE754-1.png)
+![Untitled](/assets/images/study/TTL/2022-09-25/04-IEEE754-1.png)
 
 이러한 포맷을 **IEEE 754** 포맷이라고 한다.
 
@@ -138,7 +138,7 @@ toc : true
 
 소수점을 첫번째 자리는 유효 자리로 놔두고 1.11000001 x $2^5$ 로 변환한다.
 
-![Untitled](/assets/images/study/2022-09-25/05-IEEE754-2.png)
+![Untitled](/assets/images/study/TTL/2022-09-25/05-IEEE754-2.png)
 
 그런데 지수부는 8비트로 256개의 수를 표현한다.
 
@@ -152,4 +152,4 @@ toc : true
 
 최종적으로 부동소수점을 IEEE 754 포맷에 맞춰 작성하면 아래와 같은 형태가 된다.
 
-![Untitled](/assets/images/study/2022-09-25/06-IEEE754-3.png)
+![Untitled](/assets/images/study/TTL/2022-09-25/06-IEEE754-3.png)

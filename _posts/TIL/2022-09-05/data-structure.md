@@ -16,7 +16,7 @@ toc : true
 
 ## 자료구조의 종류
 
-![error](/assets/images/study/2022-09-05-data-structure/01-data-structure.png)  
+![error](/assets/images/study/TTL/2022-09-05/01-data-structure.png)  
 
 자료구조의 종류로는 자료형의 따라 분류하는 단순 구조와 선형 구조, 비선형 구조, 파일 구조가 있다.
 
@@ -68,7 +68,7 @@ toc : true
 
 ### 스택 (Stack)
 
-![error](/assets/images/study/2022-09-05-data-structure/02-stack.png)  
+![error](/assets/images/study/TTL/2022-09-05/02-stack.png)  
 
 스택은 한쪽으로만 데이터를 넣고 뺄 수 있는 구조의 자료구조이다.
 
@@ -78,7 +78,7 @@ toc : true
 
 ### 큐 (Queue)
 
-![error](/assets/images/study/2022-09-05-data-structure/03-queue.png)    
+![error](/assets/images/study/TTL/2022-09-05/03-queue.png)    
 
 큐는 양쪽으로 데이터를 넣고 뺄 수 있는 자료구조이다.
 
@@ -96,9 +96,9 @@ toc : true
 
 ### 트리 (Tree)
 
-![error](/assets/images/study/2022-09-05-data-structure/04-tree.png)  
+![error](/assets/images/study/TTL/2022-09-05/04-tree.png)  
 
-![error](/assets/images/study/2022-09-05-data-structure/05-tree2.png)  
+![error](/assets/images/study/TTL/2022-09-05/05-tree2.png)  
 
 트리는 노드가 나무 가지처럼 연결되어 있는 비선형 자료구조이다.
 
@@ -110,7 +110,7 @@ toc : true
 
 ### 그래프 (Graph)
 
-![error](/assets/images/study/2022-09-05-data-structure/06-graph.png)  
+![error](/assets/images/study/TTL/2022-09-05/06-graph.png)  
 
 그래프는 노드와 노드를 연결하는 간선을 모아놓은 자료구조이다.
 

@@ -46,15 +46,15 @@ vim는 다양한 모드가 있는데, **명령모드, 입력모드, 라인모드
 
 </aside>
 
-![스크린샷 2022-08-21 오후 1.01.06.png](/assets/images/study/2022-08-21-vim/ideavim.png)
+![스크린샷 2022-08-21 오후 1.01.06.png](/assets/images/study/TTL/2022-08-21/ideavim.png)
 
 플러그인을 설치하고 IntelliJ를 재기동하면, 아래와 같이 명령 모드로 변경 된다.
 
 이제 Iterm2와 동일한 환경이 되었다.
 
-![Untitled](/assets/images/study/2022-08-21-vim/intellij-vim.png)
+![Untitled](/assets/images/study/TTL/2022-08-21/intellij-vim.png)
 
-![Untitled](/assets/images/study/2022-08-21-vim/iterm-vim.png)
+![Untitled](/assets/images/study/TTL/2022-08-21/iterm-vim.png)
 
 설치가 완료 되었으니, 명령어를 익혀보자.
 
@@ -69,7 +69,7 @@ vim을 설치하면 빔 길잡이가 동봉되어 설치된다.
 
 그렇게 길지 않으니 차근차근 읽어보면서 실습하도록 한다.
 
-![스크린샷 2022-08-21 오후 8.43.06.png](/assets/images/study/2022-08-21-vim/vimtutor.png)
+![스크린샷 2022-08-21 오후 8.43.06.png](/assets/images/study/TTL/2022-08-21/vimtutor.png)
 
 ## 입력 모드 전환 명령어
 

@@ -15,7 +15,7 @@ toc : true
 - 의존관계 (dependency relationship)
     - Supplier의 변화가 Client에 영향을 주는 경우 의존 관계이다.
         
-        ![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/01-dependency.png)
+        ![Untitled](/assets/images/study/TTL/2022-08-31/01-dependency.png)
         
 
 - 객체지향
@@ -29,7 +29,7 @@ toc : true
         💡 *“Component는 이를 만든 개발자의 손이 미치지 않는 곳에서도 
         아무 변경 없이 필요에 따라 확장할 수 있는 소프트웨어 덩어리이다.”*
         
-        ![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/02-martin-fowler.png)
+        ![Untitled](/assets/images/study/TTL/2022-08-31/02-martin-fowler.png)
         
         ***- Martin Fowler***
         
@@ -45,7 +45,7 @@ toc : true
             
             **⭐ Object Pattern**
             
-            ![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/03-object-pattern.png)
+            ![Untitled](/assets/images/study/TTL/2022-08-31/03-object-pattern.png)
             
             
 
@@ -212,23 +212,23 @@ public class MyService2 extends Service {
 
 `Receiver Parameter`는 다음과 같다.
 
-![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/04-receiver-parameter.png)
+![Untitled](/assets/images/study/TTL/2022-08-31/04-receiver-parameter.png)
 
 자바는 위와 같이 `this` 키워드를 사용할 수 있는데, this는 인스턴스 자기 자신을 가리키는 키워드이다.
 
-![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/05-receiver-parameter.png)
+![Untitled](/assets/images/study/TTL/2022-08-31/05-receiver-parameter.png)
 
 이런식으로 this를 정의 할 수도 있으며, this 키워드는 클래스 내부에 기본적으로 제공된다.
 
 아래 코드를 통해 알 수 있다.
 
-![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/06-receiver-parameter.png)
+![Untitled](/assets/images/study/TTL/2022-08-31/06-receiver-parameter.png)
 
 분명히 같은 이름의 메서드이지만, 파라미터의 개수가 다르기 때문에 정의가 되어야하지만,
 
 키워드로 설정되어있는 this는 보이진 않지만, JVM에 의해 첫 번째 파라미터로 제공되는 것을 알 수 있다.
 
-![Untitled](/assets/images/study/2022-08-31-static-dispatch-dynamic-dispatch-double-dispatch/07-receiver-parameter.png)
+![Untitled](/assets/images/study/TTL/2022-08-31/07-receiver-parameter.png)
 
 그렇기 때문에 this 파라미터를 추가하여도, 실제 메서드를 사용할 때는 인자를 사용하지 않으며,
 
