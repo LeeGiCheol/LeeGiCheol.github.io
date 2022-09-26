@@ -3,7 +3,7 @@ title : "리눅스 Shell Script 1부터 100까지 짝수, 홀수 더하기"
 categories : 
     - linux
 tag :
-    - shell script
+    - shell_script
 toc : true
 ---
 
